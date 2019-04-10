@@ -87,7 +87,7 @@ public class Driver extends Application
 		confirm = ConfirmationBox.show("Are you sure you want to quit?","Confirmation","Yes","No");
 		if (confirm)
 		{
-			//client.getServer().save();
+			client.getServer().save();
 			stage.close();
 		}
 	}
