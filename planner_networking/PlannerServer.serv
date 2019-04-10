@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_181" class="java.beans.XMLDecoder">
  <object class="software_masters.planner_networking.ServerImplementation" id="ServerImplementation0">
-  <void property="planTemplateMap">
-   <void method="put">
-    <string>IowaState</string>
-    <object class="software_masters.planner_networking.PlanFile">
-     <void property="canEdit">
-      <boolean>true</boolean>
+  <void id="ConcurrentHashMap0" property="cookieMap">
+   <void id="Account0" method="get">
+    <string>0</string>
+    <void id="Department0" property="department">
+     <void id="ConcurrentHashMap1" property="planFileMap">
+      <void id="PlanFile0" method="get">
+       <string>2019</string>
+       <void property="plan">
+        <void property="name">
+         <null/>
+        </void>
+       </void>
+      </void>
      </void>
-     <void property="plan">
-      <object class="software_masters.planner_networking.IowaState"/>
-     </void>
-    </object>
+    </void>
    </void>
   </void>
  </object>

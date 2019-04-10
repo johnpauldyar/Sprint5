@@ -1,5 +1,6 @@
 package software_masters.planner_networking;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -7,14 +8,13 @@ import java.rmi.server.UnicastRemoteObject;
 import javafx.application.Application;
 import javafx.stage.*;
 import javafx.scene.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
 
 public class Driver extends Application
 {
 	Registry registry;
 	Client client; 
 	Controller controller;
+	Stage stage;
 	public static void main(String [] args) throws Exception
 	{
 		launch(args);
@@ -25,8 +25,10 @@ public class Driver extends Application
 	{
 		try
 		{
-			registry = LocateRegistry.createRegistry(1075);
-			ServerImplementation server = new ServerImplementation();
+	
+			
+			registry= LocateRegistry.createRegistry(1075);
+			ServerImplementation server = ServerImplementation.load();
 			Server actualServer = server;
 			Server stub = (Server) UnicastRemoteObject.exportObject(server, 0);
 			registry.rebind("PlannerServer", stub);
@@ -38,7 +40,7 @@ public class Driver extends Application
 			try
 			{
 				registry= LocateRegistry.getRegistry(1075);
-				ServerImplementation server = new ServerImplementation();
+				ServerImplementation server = ServerImplementation.load();
 				Server actualServer = server;
 				Server stub = (Server) UnicastRemoteObject.exportObject(server, 0);
 				registry.rebind("PlannerServer", stub);
@@ -60,10 +62,33 @@ public class Driver extends Application
 
 		ClientView b = new ClientView(controller, client);
 		Scene scene = b.scene;
+		stage=primaryStage;
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("The Click me app");
+		primaryStage.setTitle("Centre Business Plans");
 		primaryStage.show();
+		primaryStage.setOnCloseRequest(
+				e ->{
+					e.consume();
+					try {
+						closing();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					});
 
+	}
+	
+	public void closing() throws RemoteException
+	{
+		boolean confirm = false;
+		confirm = ConfirmationBox.show("Are you sure you want to quit?","Confirmation","Yes","No");
+		if (confirm)
+		{
+			System.out.print("Closing");
+			client.getServer().save();
+			stage.close();
+		}
 	}
 	
 	

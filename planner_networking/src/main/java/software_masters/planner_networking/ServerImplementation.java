@@ -77,7 +77,7 @@ public class ServerImplementation implements Server
 		root2.getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).setData("Result: I am on mars");
 		
 		
-		PlanFile planfile2 = new PlanFile("2017", true, plan2);
+		PlanFile planfile2 = new PlanFile("2017", false, plan2);
 		dpt.addPlan("2017", planfile2);
 		
 

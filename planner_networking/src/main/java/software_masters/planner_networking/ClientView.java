@@ -56,7 +56,14 @@ public class ClientView extends BorderPane{
 		
 		
 		edit = new Button("Edit");
-		edit.setOnAction(e -> editView());
+		edit.setOnAction(e -> {
+			try {
+				editView();
+			} catch (IllegalArgumentException | RemoteException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			}
+		});
 		
 		
 		temp = new Button("Set Text");
@@ -101,6 +108,7 @@ public class ClientView extends BorderPane{
 		
 		
 		dataTxt = new TextField();
+		dataTxt.setMinHeight(90);
 		dataTxt.setEditable(false);
 		
 		Label yearlbl = new Label("Year: ");
@@ -135,18 +143,25 @@ public class ClientView extends BorderPane{
 		});
 		copy.setDisable(true);
 		
+		Label txLb=new Label("Fill in the content below");
+		
+		Region spacer1=new Region();
+		Region spacer2=new Region();
+		VBox.setVgrow(spacer1, Priority.ALWAYS);
+		VBox.setVgrow(spacer2, Priority.ALWAYS);
+		
 		
 		HBox h = new HBox(plans,chooseYear);
 		BorderPane pane1 = new BorderPane();
 		BorderPane pane = new BorderPane();
 		VBox v =new VBox(btn,remove,edit,save,copy);
 		HBox yearPane = new HBox(10,yearlbl, yearData,subY);
+		VBox v2 = new VBox(spacer1, txLb,dataTxt,temp,spacer2);
 		
 		pane.setLeft(tree);
 		pane.setTop(h);
 		pane.setRight(v);
-		pane1.setCenter(dataTxt);
-		pane1.setBottom(temp);
+		pane1.setCenter(v2);
 		pane1.setTop(yearPane);
 		pane.setCenter(pane1);
 		scene = new Scene(pane);
@@ -170,6 +185,8 @@ public class ClientView extends BorderPane{
 		
 		tree.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue) ->
 				tree_SelectionChanged(newValue));
+		edit.setText("View");
+		this.editView();
 	}
 	
 	
@@ -191,9 +208,13 @@ public class ClientView extends BorderPane{
 		}
 	}
 	
-	public void editView()
+	public void editView() throws IllegalArgumentException, RemoteException
 	{
-		if (edit.getText() == "Edit")
+		client.getPlan(plans.getValue().getYear());
+		Boolean bool= client.getCurrPlanFile().isCanEdit();
+		
+
+		if (edit.getText() == "Edit" && bool)
 		{
 			edit.setText("View");
 			dataTxt.setEditable(true);
@@ -203,7 +224,7 @@ public class ClientView extends BorderPane{
 			temp.setDisable(false);
 			copy.setDisable(false);
 		}
-		else
+		else if (edit.getText() == "View")
 		{
 			edit.setText("Edit");
 			dataTxt.setEditable(false);
@@ -213,6 +234,7 @@ public class ClientView extends BorderPane{
 			temp.setDisable(true);
 			copy.setDisable(true);
 		}
+		
 	
 	}
 	
@@ -240,18 +262,30 @@ public class ClientView extends BorderPane{
 			tree_SelectionChanged(newValue));
 		edit.setText("View");
 		edit.setDisable(true);
-		
+		save.setDisable(true);
 	}
 	
 	public void newPlan() throws Exception
 	{
+		String year= yearData.getText();
+		if (year.length() >=1)
+		{
 		currNode.getValue().setData(dataTxt.getText());
-		controller.save(tree.getRoot().getValue(),yearData.getText());
+		controller.save(tree.getRoot().getValue(),year);
 		chooseYear.setDisable(false);
 		plans.setDisable(false);
 		edit.setDisable(false);
 		client.getPlan(yearData.getText());
 		plans.getItems().add(client.getCurrPlanFile());
+		yearData.setText("");
+		yearData.setEditable(false);
+		subY.setDisable(true);
+		save.setDisable(false);
+		}
+		else
+		{
+			System.out.println("Please enter a valid year");
+		}
 		
 	}
 	
