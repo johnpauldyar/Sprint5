@@ -53,6 +53,10 @@ public class PlanFile implements Serializable // extends UnicastRemoteObject
 		this.year = year;
 	}
 
+	public String toString()
+	{
+		return year;
+	}
 	/**
 	 * @return the canEdit
 	 */

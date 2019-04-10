@@ -25,6 +25,14 @@ public abstract class Plan implements Serializable// extends UnicastRemoteObject
 		setDefaultStrings();
 		addDefaultNodes();
 	}
+	
+	
+	public Plan(Node root) throws RemoteException
+	{
+		this.root =root;
+		defaultNodes = new ArrayList<String>();
+		setDefaultStrings();
+	}
 
 	// creates string array node hierarchy in subclass
 	abstract protected void setDefaultStrings();
@@ -37,7 +45,7 @@ public abstract class Plan implements Serializable// extends UnicastRemoteObject
 	protected void addDefaultNodes() throws RemoteException
 	{
 		root = new Node(null, defaultNodes.get(0), null, null);
-		Node newParent = new Node(root, defaultNodes.get(1), null, null);
+		Node newParent = new Node(root, defaultNodes.get(1), "Insert Content", null);
 		root.addChild(newParent);
 		addNode(newParent);
 	}

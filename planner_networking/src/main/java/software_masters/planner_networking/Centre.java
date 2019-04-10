@@ -1,6 +1,7 @@
 package software_masters.planner_networking;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * @author Courtney and Jack
@@ -16,6 +17,13 @@ public class Centre extends Plan
 	public Centre() throws RemoteException
 	{
 		super();
+		
+	}
+	
+	public Centre(Node root) throws RemoteException
+	{
+		super(root);
+		
 	}
 
 	// set strings for default stages Centre plan

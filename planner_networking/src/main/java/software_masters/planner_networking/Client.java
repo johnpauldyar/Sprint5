@@ -1,6 +1,8 @@
 package software_masters.planner_networking;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * @author lee kendall and wesley murray
@@ -58,6 +60,14 @@ public class Client
 		this.currPlanFile = server.getPlan(year, this.cookie);
 		this.currNode = this.currPlanFile.getPlan().getRoot();
 	}
+	
+	public Collection<PlanFile> getPlans() throws RemoteException
+	{
+		return server.getPlans(this.cookie);
+		
+	}
+	
+
 
 	/**
 	 * 
@@ -139,7 +149,17 @@ public class Client
 	 */
 	public void addBranch() throws IllegalArgumentException, RemoteException
 	{
-		this.currPlanFile.getPlan().addNode(this.currNode.getParent());
+		ArrayList<String> names =this.currPlanFile.getPlan().getList();
+		int index = names.indexOf(this.currNode.getName());
+		Node temp = this.currNode.getParent();
+		
+		for (int i =index;i<names.size();i++)
+		{
+			Node temp1 = new Node(temp,names.get(i),"Insert Content",null);
+			temp.getChildren().add(temp1);
+			temp =temp1;
+		}
+		
 	}
 
 	/**

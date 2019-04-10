@@ -51,6 +51,11 @@ public class Node implements Serializable
 	{
 		return name;
 	}
+	
+	public String toString()
+	{
+		return name;
+	}
 
 	/**
 	 * Sets name of node
@@ -131,7 +136,10 @@ public class Node implements Serializable
 	 */
 	public void removeChild(Node child)
 	{
-		this.children.remove(child);
+		if (this.children.size() >1)
+		{
+			this.children.remove(child);
+		}
 	}
 
 	/*

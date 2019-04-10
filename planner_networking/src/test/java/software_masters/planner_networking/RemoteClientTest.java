@@ -47,8 +47,8 @@ public class RemoteClientTest
 		System.out.println("Starting Test");
 		try
 		{
-			String hostName = "10.14.1.76";
-			registry = LocateRegistry.getRegistry(hostName, 1060);
+			String hostName = "10.14.1.80";
+			registry = LocateRegistry.getRegistry(hostName);
 			testServer = (Server) registry.lookup("PlannerServer");
 			testClient = new Client(testServer);
 		} catch (Exception e)

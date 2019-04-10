@@ -18,6 +18,12 @@ public class IowaState extends Plan
 	{
 		super();
 	}
+	
+	public IowaState(Node root) throws RemoteException
+	{
+		super(root);
+		
+	}
 
 	// set strings for default stages IowaState plan
 	/*

@@ -17,6 +17,12 @@ public class VMOSA extends Plan
 	{
 		super();
 	}
+	
+	public VMOSA(Node root) throws RemoteException
+	{
+		super(root);
+		
+	}
 
 	/*
 	 * (non-Javadoc)

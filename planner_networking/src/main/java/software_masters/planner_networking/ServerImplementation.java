@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,8 +56,30 @@ public class ServerImplementation implements Server
 
 		Plan plan = new Centre();
 		plan.setName("Centre_Plan_1");
+		Node root = plan.getRoot();
+		root.setData("Mission 1");
+		root.getChildren().get(0).setData("Goal 1");
+		root.getChildren().get(0).getChildren().get(0).setData("Learning Objective 1");
+		root.getChildren().get(0).getChildren().get(0).getChildren().get(0).setData("Assessment Process 1");
+		root.getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).setData("Results 1");
+		
+		
 		PlanFile planfile = new PlanFile("2019", true, plan);
 		dpt.addPlan("2019", planfile);
+		
+		Plan plan2 = new Centre();
+		plan2.setName("Centre_Plan_2");
+		Node root2 = plan2.getRoot();
+		root2.setData("Mission to Mars");
+		root2.getChildren().get(0).setData("Goal to get to mars");
+		root2.getChildren().get(0).getChildren().get(0).setData("Learning Objective: learn about mars");
+		root2.getChildren().get(0).getChildren().get(0).getChildren().get(0).setData("Assessment Process: are we on mars");
+		root2.getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).setData("Result: I am on mars");
+		
+		
+		PlanFile planfile2 = new PlanFile("2017", true, plan2);
+		dpt.addPlan("2017", planfile2);
+		
 
 		Plan defaultCentre = new Centre();
 		Plan defaultVMOSA = new VMOSA();
@@ -105,6 +128,16 @@ public class ServerImplementation implements Server
 		}
 		return department.getPlan(year);
 	}
+	
+	public Collection<PlanFile> getPlans(String cookie)
+	{
+		cookieChecker(cookie);// checks that cookie is valid
+
+		Account userAccount = this.cookieMap.get(cookie);
+		Department department = userAccount.getDepartment();
+		return department.getPlans();
+	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -136,6 +169,7 @@ public class ServerImplementation implements Server
 
 	public void savePlan(PlanFile plan, String cookie)
 	{
+		System.out.println("hello");
 		cookieChecker(cookie);// checks that cookie is valid
 
 		if (plan.getYear() == null)// checks planFile is given a year
@@ -408,6 +442,11 @@ public class ServerImplementation implements Server
 	{
 		return departmentMap;
 	}
+	
+	public String getDepartmentMapString()
+	{
+		return departmentMap.toString();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -431,6 +470,8 @@ public class ServerImplementation implements Server
 	{
 		return planTemplateMap;
 	}
+	
+	
 
 	/*
 	 * (non-Javadoc)

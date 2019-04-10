@@ -3,6 +3,8 @@
  */
 package software_masters.planner_networking;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -38,6 +40,13 @@ public class Department
 			return planFileMap.get(year);
 		}
 		throw new IllegalArgumentException("A plan with this year doesn't exist in this department");
+	}
+	
+	public Collection<PlanFile> getPlans()
+	{
+		System.out.println(planFileMap.toString());
+		return planFileMap.values();
+		
 	}
 
 	/**
@@ -78,6 +87,12 @@ public class Department
 	{
 		return planFileMap;
 	}
+	
+	public String getPlanFileMapString()
+	{
+		return planFileMap.toString();
+	}
+
 
 	/**
 	 * @param planFileMap the planFileMap to set
