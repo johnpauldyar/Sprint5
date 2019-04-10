@@ -9,10 +9,22 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * @author john.dyar
+ *
+ */
 public class ConfirmationBox {
 	static Stage stage;
 	static boolean btnYesClicked;
 	
+	/**
+	 * Creates a confirmation box to be implemented in the application
+	 * @param message
+	 * @param title
+	 * @param textYes
+	 * @param textNo
+	 * @return
+	 */
 	public static boolean show(String message,String title, String textYes, String textNo)
 	{
 		btnYesClicked = false;

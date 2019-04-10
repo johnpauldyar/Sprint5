@@ -129,6 +129,10 @@ public class ServerImplementation implements Server
 		return department.getPlan(year);
 	}
 	
+	
+	/* (non-Javadoc)
+	 * @see software_masters.planner_networking.Server#getPlans(java.lang.String)
+	 */
 	public Collection<PlanFile> getPlans(String cookie)
 	{
 		cookieChecker(cookie);// checks that cookie is valid

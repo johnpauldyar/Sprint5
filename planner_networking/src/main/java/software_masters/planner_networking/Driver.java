@@ -9,56 +9,53 @@ import javafx.application.Application;
 import javafx.stage.*;
 import javafx.scene.*;
 
+/**
+ * @author john.dyar
+ *
+ */
 public class Driver extends Application
 {
+	
+	
 	Registry registry;
 	Client client; 
 	Controller controller;
 	Stage stage;
+	
+	
+	/**
+	 * launches the javafx application
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String [] args) throws Exception
 	{
 		launch(args);
 	}
 	
 	
+	/* 
+	 * Connects to the server and houses the primary stage of the application
+	 * 
+	 * (non-Javadoc)
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	@Override public void start(Stage primaryStage) throws Exception
 	{
 		try
 		{
-	
+			registry = LocateRegistry.getRegistry(1060);
+			Server stub = (Server) registry.lookup("PlannerServer");
+			client = new Client(stub);
 			
-			registry= LocateRegistry.createRegistry(1075);
-			ServerImplementation server = ServerImplementation.load();
-			Server actualServer = server;
-			Server stub = (Server) UnicastRemoteObject.exportObject(server, 0);
-			registry.rebind("PlannerServer", stub);
-			Server testServer = (Server) registry.lookup("PlannerServer");
-			client = new Client(testServer);
 		} 
 		catch (Exception e)
 		{
-			try
-			{
-				registry= LocateRegistry.getRegistry(1075);
-				ServerImplementation server = ServerImplementation.load();
-				Server actualServer = server;
-				Server stub = (Server) UnicastRemoteObject.exportObject(server, 0);
-				registry.rebind("PlannerServer", stub);
-				Server testServer = (Server) registry.lookup("PlannerServer");
-				client = new Client(testServer);
-				
-			}
-			catch(Exception i)
-			{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			}
+			
 		}
 		
 		controller = new Controller(client);
-
-	
-	
 
 		ClientView b = new ClientView(controller, client);
 		Scene scene = b.scene;
@@ -79,14 +76,18 @@ public class Driver extends Application
 
 	}
 	
+	/**
+	 * Creates a confirmation box and closes the client's application
+	 * 
+	 * @throws RemoteException
+	 */
 	public void closing() throws RemoteException
 	{
 		boolean confirm = false;
 		confirm = ConfirmationBox.show("Are you sure you want to quit?","Confirmation","Yes","No");
 		if (confirm)
 		{
-			System.out.print("Closing");
-			client.getServer().save();
+			//client.getServer().save();
 			stage.close();
 		}
 	}

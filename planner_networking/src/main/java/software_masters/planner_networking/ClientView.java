@@ -12,6 +12,10 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 
 
+/**
+ * @author john.dyar
+ *
+ */
 public class ClientView extends BorderPane{
 	
 	Client client;
@@ -36,9 +40,16 @@ public class ClientView extends BorderPane{
 	Button subY;
 
 	
+	/**
+	 * Exhaustingly creates every button, pane,box, or field in the application
+	 * 
+	 * @param controller
+	 * @param client
+	 * @throws Exception
+	 */
 	public ClientView(Controller controller, Client client) throws Exception
 	{
-		System.out.println("hello");
+
 		this.client=client;
 		this.controller=controller;
 
@@ -167,6 +178,10 @@ public class ClientView extends BorderPane{
 		scene = new Scene(pane);
 	}
 	
+	/**
+	 * Updates the currently selected node in the TreeView
+	 * @param item
+	 */
 	public void tree_SelectionChanged(TreeItem<Node> item)
 	{
 		if (item != null)
@@ -178,6 +193,12 @@ public class ClientView extends BorderPane{
 	}
 	
 
+	/**
+	 * Displays a new TreeView when a new one is selected from the ChoiceBox
+	 * 
+	 * @throws IllegalArgumentException
+	 * @throws RemoteException
+	 */
 	public void planChange() throws IllegalArgumentException, RemoteException
 	{
 		
@@ -191,12 +212,20 @@ public class ClientView extends BorderPane{
 	
 	
 	
+	/**
+	 * Adds another child node to the selected node in the TreeView
+	 * 
+	 * @throws Exception
+	 */
 	public void addBranch() throws Exception
 	{
 		controller.addBranch(currNode,plans.getValue().getYear());
 		
 	}
 	
+	/**
+	 * Removes a non-only child node
+	 */
 	public void remove()
 	{
 
@@ -208,6 +237,13 @@ public class ClientView extends BorderPane{
 		}
 	}
 	
+	/**
+	 * Toggles a button between 'edit' and 'view'
+	 * Also checks for if plans are editable
+	 * 
+	 * @throws IllegalArgumentException
+	 * @throws RemoteException
+	 */
 	public void editView() throws IllegalArgumentException, RemoteException
 	{
 		client.getPlan(plans.getValue().getYear());
@@ -238,17 +274,32 @@ public class ClientView extends BorderPane{
 	
 	}
 	
+	/**
+	 * Saves a treeView as a planFile
+	 * 
+	 * @throws RemoteException
+	 */
 	public void save() throws RemoteException
 	{
 		currNode.getValue().setData(dataTxt.getText());
 		controller.save(tree.getRoot().getValue(),plans.getValue().getYear());
 	}
 	
+	/**
+	 * Updates the text content in the tree without saving to the server
+	 * 
+	 */
 	public void setText()
 	{
 		currNode.getValue().setData(dataTxt.getText());
 	}
 	
+	/**
+	 * Makes a deep copy for when a plan is used as a template
+	 * 
+	 * @throws IllegalArgumentException
+	 * @throws RemoteException
+	 */
 	public void copy() throws IllegalArgumentException, RemoteException
 	{
 		yearData.setText("");
@@ -265,6 +316,11 @@ public class ClientView extends BorderPane{
 		save.setDisable(true);
 	}
 	
+	/**
+	 * Adds a new plan to the choicebox and department once its year is given
+	 * 
+	 * @throws Exception
+	 */
 	public void newPlan() throws Exception
 	{
 		String year= yearData.getText();

@@ -42,9 +42,13 @@ public class Department
 		throw new IllegalArgumentException("A plan with this year doesn't exist in this department");
 	}
 	
+	/**
+	 * Returns a collection of the planFiles of the department
+	 * 
+	 * @return Collection<PlanFile>
+	 */
 	public Collection<PlanFile> getPlans()
 	{
-		System.out.println(planFileMap.toString());
 		return planFileMap.values();
 		
 	}

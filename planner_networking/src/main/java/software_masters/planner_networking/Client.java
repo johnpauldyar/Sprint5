@@ -61,6 +61,12 @@ public class Client
 		this.currNode = this.currPlanFile.getPlan().getRoot();
 	}
 	
+	/**
+	 * Returns the collection of a department's planFiles
+	 * 
+	 * @return
+	 * @throws RemoteException
+	 */
 	public Collection<PlanFile> getPlans() throws RemoteException
 	{
 		return server.getPlans(this.cookie);

@@ -14,6 +14,10 @@ import javafx.scene.control.*;
 
 import javafx.scene.control.TreeItem;
 
+/**
+ * @author john.dyar
+ *
+ */
 public class Controller {
 	
 	ClientView view;
@@ -21,20 +25,38 @@ public class Controller {
 	Registry registry;
 	Controller controller;
 	
+	/**
+	 * Logs the client into the application 
+	 * @param client
+	 * @throws Exception
+	 */
 	public Controller(Client client) throws Exception
 	{
 		this.client=client;
 		client.login("user", "user");
-		client.getPlan("2019");
 		
 	}
 	
+	/**
+	 * Gets the plans of the department for display in a choiceBox
+	 * 
+	 * @param ChoiceBox<PlanFile> plans
+	 * @throws Exception
+	 */
 	public void getPlans(ChoiceBox<PlanFile> plans) throws Exception
 	{
 		plans.getItems().addAll(client.getPlans());
 	}
 	
 
+	/**
+	 * Creates a tree for display in the application
+	 * 
+	 * @param year
+	 * @return TreeView<Node>(treeRoot)
+	 * @throws IllegalArgumentException
+	 * @throws RemoteException
+	 */
 	public TreeView<Node> makeTree(String year) throws IllegalArgumentException, RemoteException
 	{
 		
@@ -46,6 +68,10 @@ public class Controller {
 		return new TreeView<Node>(treeRoot);
 	}
 	
+	/**
+	 * used to recursive search through a graph to create a TreeView
+	 * @param parent
+	 */
 	private static void recursiveSearch(TreeItem<Node> parent)
 	{
 	    if (parent.getValue().getChildren().size()!=0)
@@ -63,6 +89,12 @@ public class Controller {
 
 	 }
 	
+	/**
+	 * Creates a new branch for the Node tree, then adds it to the treeView
+	 * @param currNode
+	 * @param year
+	 * @throws Exception
+	 */
 	public void addBranch(TreeItem<Node> currNode,String year) throws Exception
 	{
 		client.getPlan(year);
@@ -73,6 +105,12 @@ public class Controller {
 		currNode.getChildren().add(tree2);
 	}
 	
+	/**
+	 * Saves a planFile to the server
+	 * @param node
+	 * @param s
+	 * @throws RemoteException
+	 */
 	public void save(Node node, String s) throws RemoteException
 	{
 		Centre plan = new Centre(node);
@@ -80,6 +118,14 @@ public class Controller {
 		client.pushPlan(planF);
 	}
 	
+	/**
+	 * Makes a deep copy of a tree for use as templates
+	 * 
+	 * @param year
+	 * @return TreeView<Node>(treeRoot)
+	 * @throws IllegalArgumentException
+	 * @throws RemoteException
+	 */
 	public TreeView<Node> makeDeepCopy(String year) throws IllegalArgumentException, RemoteException
 	{
 		client.getPlan(year);
@@ -94,6 +140,12 @@ public class Controller {
 		
 	}
 
+	/**
+	 * recursive searcher for the deep copier
+	 * @param master
+	 * @param copy
+	 * @throws RemoteException
+	 */
 	private static void deepCopier(Node master, Node copy) throws RemoteException
 	{
 	    if (master.getChildren().size()!=0)
