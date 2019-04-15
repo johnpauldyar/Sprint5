@@ -8,9 +8,14 @@
      <void id="ConcurrentHashMap1" property="planFileMap">
       <void id="PlanFile0" method="get">
        <string>2019</string>
-       <void property="plan">
+       <void id="Centre0" property="plan">
         <void property="name">
          <null/>
+        </void>
+        <void property="root">
+         <void property="data">
+          <string>Mission 2019</string>
+         </void>
         </void>
        </void>
       </void>
@@ -21,7 +26,99 @@
          <boolean>true</boolean>
         </void>
         <void property="plan">
-         <object class="software_masters.planner_networking.Centre"/>
+         <object class="software_masters.planner_networking.Centre" id="Centre1">
+          <void id="Node0" property="root">
+           <void id="ArrayList0" property="children">
+            <void id="Node1" index="0">
+             <void id="ArrayList1" property="children">
+              <void id="Node2" index="0">
+               <void id="ArrayList2" property="children">
+                <void id="Node3" index="0">
+                 <void id="ArrayList3" property="children">
+                  <void index="0">
+                   <void property="data">
+                    <string>Result 2018</string>
+                   </void>
+                  </void>
+                 </void>
+                 <void property="data">
+                  <string>AP 2018</string>
+                 </void>
+                </void>
+               </void>
+               <void property="data">
+                <string>LO 2018</string>
+               </void>
+              </void>
+             </void>
+             <void property="data">
+              <string>Goal 2018</string>
+             </void>
+            </void>
+            <void method="add">
+             <object class="software_masters.planner_networking.Node" id="Node4">
+              <void property="children">
+               <void method="add">
+                <object class="software_masters.planner_networking.Node" id="Node5">
+                 <void property="children">
+                  <void method="add">
+                   <object class="software_masters.planner_networking.Node" id="Node6">
+                    <void property="children">
+                     <void method="add">
+                      <object class="software_masters.planner_networking.Node">
+                       <void property="data">
+                        <string>Result 2</string>
+                       </void>
+                       <void property="name">
+                        <string>Results</string>
+                       </void>
+                       <void property="parent">
+                        <object idref="Node6"/>
+                       </void>
+                      </object>
+                     </void>
+                    </void>
+                    <void property="data">
+                     <string>AP 2</string>
+                    </void>
+                    <void property="name">
+                     <string>Assessment Process</string>
+                    </void>
+                    <void property="parent">
+                     <object idref="Node5"/>
+                    </void>
+                   </object>
+                  </void>
+                 </void>
+                 <void property="data">
+                  <string>LO 2</string>
+                 </void>
+                 <void property="name">
+                  <string>Learning Objective</string>
+                 </void>
+                 <void property="parent">
+                  <object idref="Node4"/>
+                 </void>
+                </object>
+               </void>
+              </void>
+              <void property="data">
+               <string>Goal 2</string>
+              </void>
+              <void property="name">
+               <string>Goal</string>
+              </void>
+              <void property="parent">
+               <object idref="Node0"/>
+              </void>
+             </object>
+            </void>
+           </void>
+           <void property="data">
+            <string>Mission 2018</string>
+           </void>
+          </void>
+         </object>
         </void>
         <void property="year">
          <string>2018</string>

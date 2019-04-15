@@ -36,6 +36,16 @@ public abstract class Plan implements Serializable// extends UnicastRemoteObject
 
 	// creates string array node hierarchy in subclass
 	abstract protected void setDefaultStrings();
+	
+	public ArrayList<String> getDefaultNodes()
+	{
+		return this.defaultNodes;
+	}
+	
+	public void setDefaultNode()
+	{
+		this.setDefaultStrings();
+	}
 
 	/**
 	 * This class builds default template based on string array
@@ -83,6 +93,11 @@ public abstract class Plan implements Serializable// extends UnicastRemoteObject
 	public Node getRoot()
 	{
 		return root;
+	}
+	
+	public void setRoot(Node root)
+	{
+		this.root=root;
 	}
 
 	/**

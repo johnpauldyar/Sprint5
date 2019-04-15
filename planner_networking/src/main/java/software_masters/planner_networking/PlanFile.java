@@ -64,6 +64,11 @@ public class PlanFile implements Serializable // extends UnicastRemoteObject
 	{
 		return canEdit;
 	}
+	
+	public boolean getCanEdit()
+	{
+		return canEdit;
+	}
 
 	/**
 	 * @param canEdit the canEdit to set

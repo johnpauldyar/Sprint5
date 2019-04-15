@@ -116,6 +116,11 @@ public class Node implements Serializable
 	{
 		return children;
 	}
+	
+	public void setChildren(ArrayList<Node> children)
+	{
+		this.children=children;
+	}
 
 	//
 
