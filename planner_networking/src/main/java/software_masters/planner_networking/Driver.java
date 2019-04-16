@@ -5,6 +5,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -17,7 +19,7 @@ public class Driver extends Application
 
 	private Registry registry;
 	private Client client;
-	private Controller controller;
+	private LoginController controller;
 	private Stage stage;
 
 	/**
@@ -52,11 +54,17 @@ public class Driver extends Application
 			e.printStackTrace();
 
 		}
-
-		controller = new Controller(client);
-
-		ClientView b = new ClientView(controller, client);
-		Scene scene = b.scene;
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../login.fxml"));
+		
+		Parent root = (Parent) loader.load();
+		Scene scene = new Scene(root);
+		
+		controller = loader.getController();
+		controller.setClient(client);
+		
+		
+		
 		stage = primaryStage;
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Centre Business Plans");

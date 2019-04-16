@@ -27,6 +27,7 @@
             <Button fx:id="EditButton" mnemonicParsing="false" onMouseClicked="#edit" text="Edit" />
             <Button fx:id="SaveButton" mnemonicParsing="false" onMouseClicked="#save" text="Save" />
             <Button fx:id="CopyButton" mnemonicParsing="false" onMouseClicked="#copy" text="Use as Template" />
+            <Button fx:id="Logout" mnemonicParsing="false" onMouseClicked="#logout" text="Logout" />
          </children>
       </VBox>
    </right>

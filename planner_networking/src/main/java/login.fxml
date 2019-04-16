@@ -13,15 +13,15 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.181" fx:controller="software_masters.planner_networking.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="software_masters.planner_networking.LoginController">
    <center>
       <VBox alignment="CENTER" prefHeight="273.0" prefWidth="546.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Select Host:" />
-                  <TextField />
+                  <TextField fx:id="hostText" />
+                  <Label fx:id="hostError" text="*" textFill="RED" visible="false" />
                </children>
                <VBox.margin>
                   <Insets top="30.0" />
@@ -35,27 +35,29 @@
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="546.0">
                <children>
                   <Label text="Username:" />
-                  <TextField>
+                  <TextField fx:id="userText">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                   </TextField>
+                  <Label fx:id="userError" text="*" textFill="RED" visible="false" />
                   <Region prefHeight="200.0" prefWidth="200.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="49.0" prefWidth="546.0">
                <children>
                   <Label text="Password:" />
-                  <PasswordField>
+                  <PasswordField fx:id="passText">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                   </PasswordField>
+                  <Label fx:id="passError" text="*" textFill="RED" visible="false" />
                   <Region prefHeight="42.0" prefWidth="194.0" />
                </children>
             </HBox>
             <Region prefHeight="20.0" prefWidth="546.0" />
-            <Button mnemonicParsing="false" text="Login" textAlignment="CENTER" />
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginPress" text="Login" textAlignment="CENTER" />
             <Separator prefHeight="0.0" prefWidth="546.0">
                <padding>
                   <Insets top="20.0" />
