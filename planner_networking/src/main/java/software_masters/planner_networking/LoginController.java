@@ -1,9 +1,13 @@
 package software_masters.planner_networking;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -33,15 +37,24 @@ public class LoginController {
 
     @FXML
     private Button loginButton;
+    
+    
+    ViewTransitionalModel vtmodel;
+    
+    public void setViewTransitionalModel(ViewTransitionalModel model)
+    {
+    	this.vtmodel=model;
+    }
 
     /**
      * This function handles when the login button is pressed
      * @param event
      * @throws IllegalArgumentException
-     * @throws RemoteException
+     * @throws IOException 
      */
     @FXML
-    public void loginPress(ActionEvent event) throws IllegalArgumentException, RemoteException{
+    public void loginPress(ActionEvent event) throws IllegalArgumentException, IOException
+    {
     	
     	String user = userText.getText();
     	String pass = passText.getText();
@@ -64,6 +77,9 @@ public class LoginController {
     		// TODO set server somehow //
     		client.login(user, pass);
     		// TODO reset scene and switch to ClientView
+    		vtmodel.showMainView();
+    		
+    
     	}
     }
 

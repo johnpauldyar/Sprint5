@@ -1,5 +1,6 @@
 package software_masters.planner_networking;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -14,12 +15,13 @@ import javafx.stage.Stage;
  * @author john.dyar
  *
  */
-public class Driver extends Application
+public class Driver extends Application implements ViewTransitionalModel
 {
 
 	private Registry registry;
 	private Client client;
 	private LoginController controller;
+	private MainController mainController;
 	private Stage stage;
 
 	/**
@@ -62,6 +64,7 @@ public class Driver extends Application
 		
 		controller = loader.getController();
 		controller.setClient(client);
+		controller.setViewTransitionalModel(this);
 		
 		
 		
@@ -81,6 +84,8 @@ public class Driver extends Application
 					e1.printStackTrace();
 				}
 			});
+		
+
 
 	}
 
@@ -98,6 +103,19 @@ public class Driver extends Application
 			client.getServer().save();
 			stage.close();
 		}
+	}
+	
+	public void showMainView() throws IOException
+	{
+		FXMLLoader loader2 = new FXMLLoader(getClass().getResource("ClientViewScene.fxml"));
+		
+		Parent root2 = (Parent) loader2.load();
+		Scene scene2 = new Scene(root2);
+		
+		mainController = loader2.getController();
+		mainController.setClient(client);
+		mainController.getPlans(mainController.);
+		stage.setScene(scene2);
 	}
 
 }

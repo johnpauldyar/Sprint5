@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 public class MainController {
 
     @FXML
-    private ChoiceBox<PlanFile> yearDropdown;
+    ChoiceBox<PlanFile> yearDropdown;
 
     @FXML
     private Button yearSelectButton;
