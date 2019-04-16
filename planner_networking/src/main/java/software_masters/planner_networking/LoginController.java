@@ -49,11 +49,10 @@ public class LoginController {
     /**
      * This function handles when the login button is pressed
      * @param event
-     * @throws IllegalArgumentException
-     * @throws IOException 
+     * @throws Exception 
      */
     @FXML
-    public void loginPress(ActionEvent event) throws IllegalArgumentException, IOException
+    public void loginPress(ActionEvent event) throws Exception
     {
     	
     	String user = userText.getText();

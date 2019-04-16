@@ -57,19 +57,12 @@ public class Driver extends Application implements ViewTransitionalModel
 
 		}
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../login.fxml"));
-		
-		Parent root = (Parent) loader.load();
-		Scene scene = new Scene(root);
-		
-		controller = loader.getController();
-		controller.setClient(client);
-		controller.setViewTransitionalModel(this);
+
 		
 		
 		
 		stage = primaryStage;
-		primaryStage.setScene(scene);
+		showLogin();
 		primaryStage.setTitle("Centre Business Plans");
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(e ->
@@ -105,7 +98,21 @@ public class Driver extends Application implements ViewTransitionalModel
 		}
 	}
 	
-	public void showMainView() throws IOException
+	public void showLogin() throws IOException
+	{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../login.fxml"));
+		
+		Parent root = (Parent) loader.load();
+		Scene scene = new Scene(root);
+		
+		controller = loader.getController();
+		controller.setClient(client);
+		controller.setViewTransitionalModel(this);
+		stage.setScene(scene);
+		
+	}
+	
+	public void showMainView() throws Exception
 	{
 		FXMLLoader loader2 = new FXMLLoader(getClass().getResource("ClientViewScene.fxml"));
 		
@@ -114,7 +121,8 @@ public class Driver extends Application implements ViewTransitionalModel
 		
 		mainController = loader2.getController();
 		mainController.setClient(client);
-		mainController.getPlans(mainController.);
+		mainController.setViewTransitionalModel(this);
+		mainController.getPlans(mainController.yearDropdown);
 		stage.setScene(scene2);
 	}
 

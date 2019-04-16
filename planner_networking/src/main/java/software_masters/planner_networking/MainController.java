@@ -1,5 +1,6 @@
 package software_masters.planner_networking;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 
 import javafx.fxml.FXML;
@@ -54,6 +55,13 @@ public class MainController {
     private Client client;
     
     private TreeItem<Node> currNode;
+    
+    ViewTransitionalModel vtmodel;
+    
+    public void setViewTransitionalModel(ViewTransitionalModel model)
+    {
+    	this.vtmodel=model;
+    }
     
     public void setClient(Client client)
     {
@@ -112,8 +120,15 @@ public class MainController {
     }
 
     @FXML
-    void logout(MouseEvent event) {
-
+    void logout(MouseEvent event) throws IOException
+    {
+		boolean confirm = false;
+		confirm = ConfirmationBox.show("Do you want to save before you log out?", "Save", "Yes", "No");
+		if (confirm)
+		{
+			saveC(tree.getRoot().getValue(), yearDropdown.getValue().getYear());
+		}
+    	vtmodel.showLogin();
     }
 
     @FXML
