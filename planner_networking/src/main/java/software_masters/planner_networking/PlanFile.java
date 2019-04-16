@@ -32,9 +32,9 @@ public class PlanFile implements Serializable // extends UnicastRemoteObject
 	 */
 	public PlanFile() throws RemoteException
 	{
-		this.year = null;
-		this.canEdit = false;
-		this.plan = null;
+		year = null;
+		canEdit = false;
+		plan = null;
 	}
 
 	/**
@@ -57,6 +57,7 @@ public class PlanFile implements Serializable // extends UnicastRemoteObject
 	{
 		return year;
 	}
+
 	/**
 	 * @return the canEdit
 	 */
@@ -64,7 +65,7 @@ public class PlanFile implements Serializable // extends UnicastRemoteObject
 	{
 		return canEdit;
 	}
-	
+
 	public boolean getCanEdit()
 	{
 		return canEdit;
@@ -103,26 +104,42 @@ public class PlanFile implements Serializable // extends UnicastRemoteObject
 	public boolean equals(Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		PlanFile other = (PlanFile) obj;
 		if (canEdit != other.canEdit)
+		{
 			return false;
+		}
 		if (plan == null)
 		{
 			if (other.plan != null)
+			{
 				return false;
+			}
 		} else if (!plan.equals(other.plan))
+		{
 			return false;
+		}
 		if (year == null)
 		{
 			if (other.year != null)
+			{
 				return false;
+			}
 		} else if (!year.equals(other.year))
+		{
 			return false;
+		}
 		return true;
 	}
 

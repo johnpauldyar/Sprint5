@@ -17,11 +17,11 @@ public class VMOSA extends Plan
 	{
 		super();
 	}
-	
+
 	public VMOSA(Node root) throws RemoteException
 	{
 		super(root);
-		
+
 	}
 
 	/*
@@ -31,12 +31,12 @@ public class VMOSA extends Plan
 	 */
 	protected void setDefaultStrings()
 	{
-		this.getList().add("Vision");
-		this.getList().add("Mission");
-		this.getList().add("Objective");
-		this.getList().add("Strategy");
-		this.getList().add("Action Plan");
-		this.getList().add("Assessment");
+		getList().add("Vision");
+		getList().add("Mission");
+		getList().add("Objective");
+		getList().add("Strategy");
+		getList().add("Action Plan");
+		getList().add("Assessment");
 	}
 
 	/**
@@ -48,16 +48,16 @@ public class VMOSA extends Plan
 	 */
 	public boolean addNode(Node parent) throws RemoteException, IllegalArgumentException
 	{
-		if (parent.getName() == "Vision" || parent == null)
+		if ((parent.getName() == "Vision") || (parent == null))
 		{
 			throw new IllegalArgumentException("Cannot add to this parent");
 		} else
 		{
 
-			for (int i = (this.getList().indexOf(parent.getName())) + 1; i < this.getList().size(); i++)
+			for (int i = (getList().indexOf(parent.getName())) + 1; i < getList().size(); i++)
 			{
 
-				Node newNode = new Node(parent, this.getList().get(i), null, null);
+				Node newNode = new Node(parent, getList().get(i), null, null);
 
 				parent.addChild(newNode);
 				parent = newNode;
@@ -76,8 +76,8 @@ public class VMOSA extends Plan
 	public boolean removeNode(Node nodeRemove) throws IllegalArgumentException
 
 	{
-		if (nodeRemove.getName() == this.getRoot().getName() || nodeRemove.getParent().getChildren().size() == 1
-				|| nodeRemove == null)
+		if ((nodeRemove.getName() == getRoot().getName()) || (nodeRemove.getParent().getChildren().size() == 1)
+				|| (nodeRemove == null))
 
 		{
 

@@ -45,14 +45,14 @@ public class ServerImplementation implements Server
 	public ServerImplementation() throws RemoteException
 	{
 		Department dpt = new Department();
-		this.departmentMap.put("default", dpt);
+		departmentMap.put("default", dpt);
 
 		Account admin = new Account("admin", "0", dpt, true);
 		Account user = new Account("user", "1", dpt, false);
-		this.loginMap.put("admin", admin);
-		this.loginMap.put("user", user);
-		this.cookieMap.put("0", admin);
-		this.cookieMap.put("1", user);
+		loginMap.put("admin", admin);
+		loginMap.put("user", user);
+		cookieMap.put("0", admin);
+		cookieMap.put("1", user);
 
 		Plan plan = new Centre();
 		plan.setName("Centre_Plan_1");
@@ -62,29 +62,28 @@ public class ServerImplementation implements Server
 		root.getChildren().get(0).getChildren().get(0).setData("Learning Objective 1");
 		root.getChildren().get(0).getChildren().get(0).getChildren().get(0).setData("Assessment Process 1");
 		root.getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).setData("Results 1");
-		
-		
+
 		PlanFile planfile = new PlanFile("2019", true, plan);
 		dpt.addPlan("2019", planfile);
-		
+
 		Plan plan2 = new Centre();
 		plan2.setName("Centre_Plan_2");
 		Node root2 = plan2.getRoot();
 		root2.setData("Mission to Mars");
 		root2.getChildren().get(0).setData("Goal to get to mars");
 		root2.getChildren().get(0).getChildren().get(0).setData("Learning Objective: learn about mars");
-		root2.getChildren().get(0).getChildren().get(0).getChildren().get(0).setData("Assessment Process: are we on mars");
-		root2.getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0).setData("Result: I am on mars");
-		
-		
+		root2.getChildren().get(0).getChildren().get(0).getChildren().get(0)
+				.setData("Assessment Process: are we on mars");
+		root2.getChildren().get(0).getChildren().get(0).getChildren().get(0).getChildren().get(0)
+				.setData("Result: I am on mars");
+
 		PlanFile planfile2 = new PlanFile("2017", false, plan2);
 		dpt.addPlan("2017", planfile2);
-		
 
 		Plan defaultCentre = new Centre();
 		Plan defaultVMOSA = new VMOSA();
-		this.planTemplateMap.put("Centre", new PlanFile(null, true, defaultCentre));
-		this.planTemplateMap.put("VMOSA", new PlanFile(null, true, defaultVMOSA));
+		planTemplateMap.put("Centre", new PlanFile(null, true, defaultCentre));
+		planTemplateMap.put("VMOSA", new PlanFile(null, true, defaultVMOSA));
 
 	}
 
@@ -97,12 +96,12 @@ public class ServerImplementation implements Server
 
 	public String logIn(String username, String password)
 	{
-		if (!this.loginMap.containsKey(username))// checks username is valid
+		if (!loginMap.containsKey(username))// checks username is valid
 		{
 			throw new IllegalArgumentException("Invalid username and/or password");
 
 		}
-		Account userAccount = this.loginMap.get(username);
+		Account userAccount = loginMap.get(username);
 
 		String cookie = userAccount.testCredentials(password);
 		return cookie;
@@ -119,7 +118,7 @@ public class ServerImplementation implements Server
 	{
 		cookieChecker(cookie);// checks that cookie is valid
 
-		Account userAccount = this.cookieMap.get(cookie);
+		Account userAccount = cookieMap.get(cookie);
 		Department department = userAccount.getDepartment();
 		if (!department.containsPlan(year))
 		{
@@ -128,20 +127,20 @@ public class ServerImplementation implements Server
 		}
 		return department.getPlan(year);
 	}
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#getPlans(java.lang.String)
 	 */
 	public Collection<PlanFile> getPlans(String cookie)
 	{
 		cookieChecker(cookie);// checks that cookie is valid
 
-		Account userAccount = this.cookieMap.get(cookie);
+		Account userAccount = cookieMap.get(cookie);
 		Department department = userAccount.getDepartment();
 		return department.getPlans();
 	}
-	
 
 	/*
 	 * (non-Javadoc)
@@ -155,12 +154,12 @@ public class ServerImplementation implements Server
 	{
 		cookieChecker(cookie);// checks that cookie is valid
 
-		if (!this.planTemplateMap.containsKey(name))// checks plan template exists
+		if (!planTemplateMap.containsKey(name))// checks plan template exists
 		{
 			throw new IllegalArgumentException("Plan outline doesn't exist");
 
 		}
-		return this.planTemplateMap.get(name);
+		return planTemplateMap.get(name);
 
 	}
 
@@ -180,7 +179,7 @@ public class ServerImplementation implements Server
 			throw new IllegalArgumentException("This planFile needs a year!");
 		}
 
-		Account userAccount = this.cookieMap.get(cookie);
+		Account userAccount = cookieMap.get(cookie);
 		Department dept = userAccount.getDepartment();
 
 		if (dept.containsPlan(plan.getYear()))
@@ -211,10 +210,10 @@ public class ServerImplementation implements Server
 		departmentChecker(departmentName);
 
 		String newCookie = cookieMaker();
-		Department newDept = this.departmentMap.get(departmentName);
+		Department newDept = departmentMap.get(departmentName);
 		Account newAccount = new Account(password, newCookie, newDept, isAdmin);
-		this.loginMap.put(username, newAccount);
-		this.cookieMap.put(newAccount.getCookie(), newAccount);
+		loginMap.put(username, newAccount);
+		cookieMap.put(newAccount.getCookie(), newAccount);
 
 	}
 
@@ -234,17 +233,17 @@ public class ServerImplementation implements Server
 		StringBuilder buffer = new StringBuilder(targetStringLength);
 		for (int i = 0; i < targetStringLength; i++)
 		{
-			int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
+			int randomLimitedInt = leftLimit + (int) (random.nextFloat() * ((rightLimit - leftLimit) + 1));
 			buffer.append((char) randomLimitedInt);
 		}
 		generatedString = buffer.toString();
 
-		while (this.cookieMap.containsKey(generatedString))
+		while (cookieMap.containsKey(generatedString))
 		{
 			buffer = new StringBuilder(targetStringLength);
 			for (int i = 0; i < targetStringLength; i++)
 			{
-				int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
+				int randomLimitedInt = leftLimit + (int) (random.nextFloat() * ((rightLimit - leftLimit) + 1));
 				buffer.append((char) randomLimitedInt);
 			}
 			generatedString = buffer.toString();
@@ -265,7 +264,7 @@ public class ServerImplementation implements Server
 		adminChecker(cookie);
 		departmentChecker(departmentName);
 
-		Department dept = this.departmentMap.get(departmentName);
+		Department dept = departmentMap.get(departmentName);
 		if (!dept.containsPlan(year))
 		{
 			throw new IllegalArgumentException("Plan doesn't exist");
@@ -288,7 +287,7 @@ public class ServerImplementation implements Server
 		cookieChecker(cookie);// checks that cookie is valid and that user is admin
 		adminChecker(cookie);
 
-		this.departmentMap.put(departmentName, new Department());
+		departmentMap.put(departmentName, new Department());
 
 	}
 
@@ -302,7 +301,7 @@ public class ServerImplementation implements Server
 
 	public void addPlanTemplate(String name, PlanFile plan)
 	{
-		this.planTemplateMap.put(name, plan);
+		planTemplateMap.put(name, plan);
 	}
 
 	/**
@@ -351,7 +350,7 @@ public class ServerImplementation implements Server
 	 */
 	private void cookieChecker(String cookie)
 	{
-		if (!this.cookieMap.containsKey(cookie))
+		if (!cookieMap.containsKey(cookie))
 		{
 			throw new IllegalArgumentException("Need to log in");
 
@@ -367,7 +366,7 @@ public class ServerImplementation implements Server
 	 */
 	private void adminChecker(String cookie)
 	{
-		if (!this.cookieMap.get(cookie).isAdmin())// Checks that user is admin
+		if (!cookieMap.get(cookie).isAdmin())// Checks that user is admin
 		{
 			throw new IllegalArgumentException("You're not an admin");
 		}
@@ -381,7 +380,7 @@ public class ServerImplementation implements Server
 	 */
 	private void departmentChecker(String name)
 	{
-		if (!this.departmentMap.containsKey(name))
+		if (!departmentMap.containsKey(name))
 		{
 			throw new IllegalArgumentException("Deparment doesn't exist");
 		}
@@ -445,7 +444,7 @@ public class ServerImplementation implements Server
 	{
 		return departmentMap;
 	}
-	
+
 	public String getDepartmentMapString()
 	{
 		return departmentMap.toString();
@@ -473,8 +472,6 @@ public class ServerImplementation implements Server
 	{
 		return planTemplateMap;
 	}
-	
-	
 
 	/*
 	 * (non-Javadoc)
@@ -502,36 +499,58 @@ public class ServerImplementation implements Server
 	public boolean equals(Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		ServerImplementation other = (ServerImplementation) obj;
 		if (cookieMap == null)
 		{
 			if (other.cookieMap != null)
+			{
 				return false;
+			}
 		} else if (!ServerImplementation.<String, Account>hashesEqual(cookieMap, other.cookieMap))
+		{
 			return false;
+		}
 		if (departmentMap == null)
 		{
 			if (other.departmentMap != null)
+			{
 				return false;
+			}
 		} else if (!ServerImplementation.<String, Department>hashesEqual(departmentMap, other.departmentMap))
+		{
 			return false;
+		}
 		if (loginMap == null)
 		{
 			if (other.loginMap != null)
+			{
 				return false;
+			}
 		} else if (!ServerImplementation.<String, Account>hashesEqual(loginMap, other.loginMap))
+		{
 			return false;
+		}
 		if (planTemplateMap == null)
 		{
 			if (other.planTemplateMap != null)
+			{
 				return false;
+			}
 		} else if (!ServerImplementation.<String, PlanFile>hashesEqual(planTemplateMap, other.planTemplateMap))
+		{
 			return false;
+		}
 		return true;
 	}
 
@@ -548,11 +567,17 @@ public class ServerImplementation implements Server
 		{
 			K key = keyList.nextElement();
 			if (!map1.containsKey(key))
+			{
 				return false;
+			}
 			if (!map2.containsKey(key))
+			{
 				return false;
+			}
 			if (!map1.get(key).equals(map2.get(key)))
+			{
 				return false;
+			}
 		}
 		return true;
 	}

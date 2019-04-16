@@ -3,7 +3,6 @@
  */
 package software_masters.planner_networking;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
@@ -41,7 +40,7 @@ public class Department
 		}
 		throw new IllegalArgumentException("A plan with this year doesn't exist in this department");
 	}
-	
+
 	/**
 	 * Returns a collection of the planFiles of the department
 	 * 
@@ -50,7 +49,7 @@ public class Department
 	public Collection<PlanFile> getPlans()
 	{
 		return planFileMap.values();
-		
+
 	}
 
 	/**
@@ -67,6 +66,7 @@ public class Department
 
 	/**
 	 * Removes planFile from department hash given a year
+	 * 
 	 * @param year of planFile to be removed
 	 */
 	public void removePlan(String year)
@@ -76,12 +76,13 @@ public class Department
 
 	/**
 	 * Checks if the plan exists within this department
+	 * 
 	 * @param year
 	 * @return
 	 */
 	public boolean containsPlan(String year)
 	{
-		return this.planFileMap.containsKey(year);
+		return planFileMap.containsKey(year);
 	}
 
 	/**
@@ -91,12 +92,11 @@ public class Department
 	{
 		return planFileMap;
 	}
-	
+
 	public String getPlanFileMapString()
 	{
 		return planFileMap.toString();
 	}
-
 
 	/**
 	 * @param planFileMap the planFileMap to set
@@ -116,7 +116,7 @@ public class Department
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((planFileMap == null) ? 0 : planFileMap.hashCode());
+		result = (prime * result) + ((planFileMap == null) ? 0 : planFileMap.hashCode());
 		return result;
 	}
 
@@ -129,18 +129,28 @@ public class Department
 	public boolean equals(Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		Department other = (Department) obj;
 		if (planFileMap == null)
 		{
 			if (other.planFileMap != null)
+			{
 				return false;
+			}
 		} else if (!Department.<String, PlanFile>hashesEqual(planFileMap, other.planFileMap))
+		{
 			return false;
+		}
 		return true;
 	}
 
@@ -150,11 +160,17 @@ public class Department
 		{
 			K key = keyList.nextElement();
 			if (!map1.containsKey(key))
+			{
 				return false;
+			}
 			if (!map2.containsKey(key))
+			{
 				return false;
+			}
 			if (!map1.get(key).equals(map2.get(key)))
+			{
 				return false;
+			}
 		}
 		return true;
 	}

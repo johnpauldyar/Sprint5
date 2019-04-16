@@ -18,11 +18,11 @@ public class IowaState extends Plan
 	{
 		super();
 	}
-	
+
 	public IowaState(Node root) throws RemoteException
 	{
 		super(root);
-		
+
 	}
 
 	// set strings for default stages IowaState plan
@@ -33,14 +33,14 @@ public class IowaState extends Plan
 	 */
 	protected void setDefaultStrings()
 	{
-		this.getList().add("Vision");
-		this.getList().add("Mission");
-		this.getList().add("Core Value");
-		this.getList().add("Strategy");
-		this.getList().add("Goal");
-		this.getList().add("Objective");
-		this.getList().add("Action Plan");
-		this.getList().add("Assessment");
+		getList().add("Vision");
+		getList().add("Mission");
+		getList().add("Core Value");
+		getList().add("Strategy");
+		getList().add("Goal");
+		getList().add("Objective");
+		getList().add("Action Plan");
+		getList().add("Assessment");
 	}
 
 	/**
@@ -51,16 +51,16 @@ public class IowaState extends Plan
 	 */
 	public boolean addNode(Node parent) throws RemoteException, IllegalArgumentException
 	{
-		if (parent.getName() == "Vision" || parent == null)
+		if ((parent.getName() == "Vision") || (parent == null))
 		{
 			throw new IllegalArgumentException("Cannot add to this parent");
 		} else
 		{
 
-			for (int i = (this.getList().indexOf(parent.getName())) + 1; i < this.getList().size(); i++)
+			for (int i = (getList().indexOf(parent.getName())) + 1; i < getList().size(); i++)
 			{
 
-				Node newNode = new Node(parent, this.getList().get(i), null, null);
+				Node newNode = new Node(parent, getList().get(i), null, null);
 
 				parent.addChild(newNode);
 				parent = newNode;
@@ -79,8 +79,8 @@ public class IowaState extends Plan
 	 */
 	public boolean removeNode(Node nodeRemove) throws IllegalArgumentException
 	{
-		if (nodeRemove.getName() == this.getRoot().getName() || nodeRemove.getParent().getChildren().size() == 1
-				|| nodeRemove == null)
+		if ((nodeRemove.getName() == getRoot().getName()) || (nodeRemove.getParent().getChildren().size() == 1)
+				|| (nodeRemove == null))
 		{
 
 			throw new IllegalArgumentException("Cannot remove this node");

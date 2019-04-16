@@ -1,8 +1,9 @@
 package software_masters.planner_networking;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.rmi.RemoteException;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class ServerTest
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception
 	{
-		testServer = (Server) new ServerImplementation();
+		testServer = new ServerImplementation();
 	}
 
 	@AfterClass

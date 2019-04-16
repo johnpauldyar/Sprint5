@@ -42,9 +42,9 @@ public class Client
 	 */
 	public void login(String username, String password) throws IllegalArgumentException, RemoteException
 	{
-		this.currPlanFile = null;
-		this.currNode = null;
-		this.cookie = server.logIn(username, password);
+		currPlanFile = null;
+		currNode = null;
+		cookie = server.logIn(username, password);
 	}
 
 	/**
@@ -57,10 +57,10 @@ public class Client
 	 */
 	public void getPlan(String year) throws IllegalArgumentException, RemoteException
 	{
-		this.currPlanFile = server.getPlan(year, this.cookie);
-		this.currNode = this.currPlanFile.getPlan().getRoot();
+		currPlanFile = server.getPlan(year, cookie);
+		currNode = currPlanFile.getPlan().getRoot();
 	}
-	
+
 	/**
 	 * Returns the collection of a department's planFiles
 	 * 
@@ -69,11 +69,9 @@ public class Client
 	 */
 	public Collection<PlanFile> getPlans() throws RemoteException
 	{
-		return server.getPlans(this.cookie);
-		
-	}
-	
+		return server.getPlans(cookie);
 
+	}
 
 	/**
 	 * 
@@ -86,8 +84,8 @@ public class Client
 	 */
 	public void getPlanOutline(String name) throws IllegalArgumentException, RemoteException
 	{
-		this.currPlanFile = server.getPlanOutline(name, this.cookie);
-		this.currNode = this.currPlanFile.getPlan().getRoot();
+		currPlanFile = server.getPlanOutline(name, cookie);
+		currNode = currPlanFile.getPlan().getRoot();
 	}
 
 	/**
@@ -100,7 +98,7 @@ public class Client
 	 */
 	public void pushPlan(PlanFile plan) throws IllegalArgumentException, RemoteException
 	{
-		server.savePlan(plan, this.cookie);
+		server.savePlan(plan, cookie);
 	}
 
 	/**
@@ -117,7 +115,7 @@ public class Client
 	public void addUser(String username, String password, String departmentName, boolean isAdmin)
 			throws IllegalArgumentException, RemoteException
 	{
-		server.addUser(username, password, departmentName, isAdmin, this.cookie);
+		server.addUser(username, password, departmentName, isAdmin, cookie);
 	}
 
 	/**
@@ -131,7 +129,7 @@ public class Client
 	public void flagPlan(String departmentName, String year, boolean canEdit)
 			throws IllegalArgumentException, RemoteException
 	{
-		server.flagPlan(departmentName, year, canEdit, this.cookie);
+		server.flagPlan(departmentName, year, canEdit, cookie);
 
 	}
 
@@ -143,7 +141,7 @@ public class Client
 	 */
 	public void addDepartment(String departmentName) throws IllegalArgumentException, RemoteException
 	{
-		server.addDepartment(departmentName, this.cookie);
+		server.addDepartment(departmentName, cookie);
 
 	}
 
@@ -155,17 +153,17 @@ public class Client
 	 */
 	public void addBranch() throws IllegalArgumentException, RemoteException
 	{
-		ArrayList<String> names =this.currPlanFile.getPlan().getList();
-		int index = names.indexOf(this.currNode.getName());
-		Node temp = this.currNode.getParent();
-		
-		for (int i =index;i<names.size();i++)
+		ArrayList<String> names = currPlanFile.getPlan().getList();
+		int index = names.indexOf(currNode.getName());
+		Node temp = currNode.getParent();
+
+		for (int i = index; i < names.size(); i++)
 		{
-			Node temp1 = new Node(temp,names.get(i),"Insert Content",null);
+			Node temp1 = new Node(temp, names.get(i), "Insert Content", null);
 			temp.getChildren().add(temp1);
-			temp =temp1;
+			temp = temp1;
 		}
-		
+
 	}
 
 	/**
@@ -175,9 +173,9 @@ public class Client
 	 */
 	public void removeBranch() throws IllegalArgumentException
 	{
-		Node temp = this.currNode.getParent();
-		this.currPlanFile.getPlan().removeNode(this.currNode);
-		this.currNode = temp.getChildren().get(0);
+		Node temp = currNode.getParent();
+		currPlanFile.getPlan().removeNode(currNode);
+		currNode = temp.getChildren().get(0);
 	}
 
 	/**
@@ -187,7 +185,7 @@ public class Client
 	 */
 	public void editData(String data)
 	{
-		this.currNode.setData(data);
+		currNode.setData(data);
 	}
 
 	/**
@@ -195,7 +193,7 @@ public class Client
 	 */
 	public String getData()
 	{
-		return this.currNode.getData();
+		return currNode.getData();
 	}
 
 	/**
@@ -203,7 +201,7 @@ public class Client
 	 */
 	public void setYear(String year)
 	{
-		this.currPlanFile.setYear(year);
+		currPlanFile.setYear(year);
 	}
 
 	/**

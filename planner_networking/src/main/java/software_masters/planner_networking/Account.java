@@ -25,10 +25,10 @@ public class Account
 	 */
 	public Account()
 	{
-		this.password = null;
-		this.cookie = null;
-		this.department = null;
-		this.isAdmin = false;
+		password = null;
+		cookie = null;
+		department = null;
+		isAdmin = false;
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class Account
 	 */
 	public String testCredentials(String password) throws IllegalArgumentException // returns cookie
 	{
-		if (this.getPassword().equals(password))
+		if (getPassword().equals(password))
 		{
 			return cookie;
 		}
@@ -136,32 +136,52 @@ public class Account
 	public boolean equals(Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		Account other = (Account) obj;
 		if (cookie == null)
 		{
 			if (other.cookie != null)
+			{
 				return false;
+			}
 		} else if (!cookie.equals(other.cookie))
+		{
 			return false;
+		}
 		if (department == null)
 		{
 			if (other.department != null)
+			{
 				return false;
+			}
 		} else if (!department.equals(other.department))
+		{
 			return false;
+		}
 		if (isAdmin != other.isAdmin)
+		{
 			return false;
+		}
 		if (password == null)
 		{
 			if (other.password != null)
+			{
 				return false;
+			}
 		} else if (!password.equals(other.password))
+		{
 			return false;
+		}
 		return true;
 	}
 

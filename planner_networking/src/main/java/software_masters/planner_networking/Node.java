@@ -1,8 +1,8 @@
 package software_masters.planner_networking;
 
-import java.util.ArrayList;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * @author Courtney and Jack
@@ -51,7 +51,7 @@ public class Node implements Serializable
 	{
 		return name;
 	}
-	
+
 	public String toString()
 	{
 		return name;
@@ -116,10 +116,10 @@ public class Node implements Serializable
 	{
 		return children;
 	}
-	
+
 	public void setChildren(ArrayList<Node> children)
 	{
-		this.children=children;
+		this.children = children;
 	}
 
 	//
@@ -132,7 +132,7 @@ public class Node implements Serializable
 	 */
 	public void addChild(Node child)
 	{
-		this.children.add(child);
+		children.add(child);
 	}
 
 	// remove child node from a node's children list
@@ -141,9 +141,9 @@ public class Node implements Serializable
 	 */
 	public void removeChild(Node child)
 	{
-		if (this.children.size() >1)
+		if (children.size() > 1)
 		{
-			this.children.remove(child);
+			children.remove(child);
 		}
 	}
 
@@ -156,34 +156,54 @@ public class Node implements Serializable
 	public boolean equals(Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		Node other = (Node) obj;
 		if (children == null)
 		{
 			if (other.children != null)
+			{
 				return false;
+			}
 		} else if (!children.equals(other.children))
+		{
 			return false;
+		}
 		if (data == null)
 		{
 			if (other.data != null)
+			{
 				return false;
+			}
 		} else if (!data.equals(other.data))
+		{
 			return false;
+		}
 		if (name == null)
 		{
 			if (other.name != null)
+			{
 				return false;
+			}
 		} else if (!name.equals(other.name))
+		{
 			return false;
+		}
 		if (parent == null)
 		{
 			if (other.parent != null)
+			{
 				return false;
+			}
 		}
 		return true;
 	}

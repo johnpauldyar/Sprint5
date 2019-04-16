@@ -1,6 +1,6 @@
 package software_masters.planner_networking;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.rmi.RemoteException;
 

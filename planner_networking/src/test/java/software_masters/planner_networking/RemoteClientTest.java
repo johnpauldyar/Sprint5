@@ -1,6 +1,9 @@
 package software_masters.planner_networking;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -62,10 +65,10 @@ public class RemoteClientTest
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception
 	{
-//		registry.unbind("PlannerServer");
-//        // Unexport; this will also remove us from the RMI runtime
-//        UnicastRemoteObject.unexportObject(testServer, true);
-//        System.out.println("closing server");
+		// registry.unbind("PlannerServer");
+		// // Unexport; this will also remove us from the RMI runtime
+		// UnicastRemoteObject.unexportObject(testServer, true);
+		// System.out.println("closing server");
 	}
 
 	/**
@@ -113,10 +116,11 @@ public class RemoteClientTest
 		testClient.addUser("newUser", "newUser", "default", false);
 
 		// test if account was actually created and correct department was added
-//		ConcurrentHashMap<String, Account> loginMap = actualServer.getLoginMap();
-//		assertTrue(loginMap.containsKey("newUser"));
-//		ConcurrentHashMap<String, Department> departmentMap = actualServer.getDepartmentMap();
-//		assertEquals(departmentMap.get("default"),loginMap.get("newUser").getDepartment());
+		// ConcurrentHashMap<String, Account> loginMap = actualServer.getLoginMap();
+		// assertTrue(loginMap.containsKey("newUser"));
+		// ConcurrentHashMap<String, Department> departmentMap =
+		// actualServer.getDepartmentMap();
+		// assertEquals(departmentMap.get("default"),loginMap.get("newUser").getDepartment());
 
 		// verify can successfully obtain default plan using the created account
 		testClient.login("newUser", "newUser");
@@ -150,8 +154,9 @@ public class RemoteClientTest
 		testClient.addDepartment("newDepartment");
 
 		// verifies the department object was created and added to hash
-//		ConcurrentHashMap<String, Department> departmentMap = actualServer.getDepartmentMap();
-//		assertTrue(departmentMap.containsKey("newDepartment"));
+		// ConcurrentHashMap<String, Department> departmentMap =
+		// actualServer.getDepartmentMap();
+		// assertTrue(departmentMap.containsKey("newDepartment"));
 
 		// verifies department was created because user cannot be assign a department
 		// that does not exist. That would throw an exception.
@@ -175,8 +180,9 @@ public class RemoteClientTest
 		// tests admin can flag file.
 		testClient.login("admin", "admin");
 		testClient.flagPlan("default", "2019", true);
-//		ConcurrentHashMap<String, Department> departmentMap = actualServer.getDepartmentMap();
-//		PlanFile file=departmentMap.get("default").getPlan("2019");
+		// ConcurrentHashMap<String, Department> departmentMap =
+		// actualServer.getDepartmentMap();
+		// PlanFile file=departmentMap.get("default").getPlan("2019");
 		testClient.getPlan("2019");
 		PlanFile file = testClient.getCurrPlanFile();
 		assertTrue(file.isCanEdit());
@@ -201,7 +207,8 @@ public class RemoteClientTest
 		assertThrows(IllegalArgumentException.class, () -> testClient.getPlan("2000"));
 
 		// verify obtained plan is as expected
-//		ConcurrentHashMap<String, Department> departmentMap = actualServer.getDepartmentMap();
+		// ConcurrentHashMap<String, Department> departmentMap =
+		// actualServer.getDepartmentMap();
 		Plan plan = new Centre();
 		plan.setName("Centre_Plan_1");
 		PlanFile planfile = new PlanFile("2016", true, plan);

@@ -1,7 +1,6 @@
 package software_masters.planner_networking;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 /**
  * @author Courtney and Jack
@@ -17,13 +16,13 @@ public class Centre extends Plan
 	public Centre() throws RemoteException
 	{
 		super();
-		
+
 	}
-	
+
 	public Centre(Node root) throws RemoteException
 	{
 		super(root);
-		
+
 	}
 
 	// set strings for default stages Centre plan
@@ -34,11 +33,11 @@ public class Centre extends Plan
 	 */
 	protected void setDefaultStrings()
 	{
-		this.getList().add("Mission");
-		this.getList().add("Goal");
-		this.getList().add("Learning Objective");
-		this.getList().add("Assessment Process");
-		this.getList().add("Results");
+		getList().add("Mission");
+		getList().add("Goal");
+		getList().add("Learning Objective");
+		getList().add("Assessment Process");
+		getList().add("Results");
 	}
 
 	/**
@@ -55,10 +54,10 @@ public class Centre extends Plan
 			throw new IllegalArgumentException("Cannot add to this parent");
 		} else
 		{
-			for (int i = (this.getList().indexOf(parent.getName())) + 1; i < this.getList().size(); i++)
+			for (int i = (getList().indexOf(parent.getName())) + 1; i < getList().size(); i++)
 			{
 
-				Node newNode = new Node(parent, this.getList().get(i), null, null);
+				Node newNode = new Node(parent, getList().get(i), null, null);
 
 				parent.addChild(newNode);
 				parent = newNode;
@@ -79,8 +78,8 @@ public class Centre extends Plan
 	 */
 	public boolean removeNode(Node nodeRemove) throws IllegalArgumentException
 	{
-		if ((nodeRemove.getName() == this.getRoot().getName()) || nodeRemove.getParent().getChildren().size() == 1
-				|| nodeRemove == null)
+		if ((nodeRemove.getName() == getRoot().getName()) || (nodeRemove.getParent().getChildren().size() == 1)
+				|| (nodeRemove == null))
 		{
 
 			throw new IllegalArgumentException("Cannot remove this node");

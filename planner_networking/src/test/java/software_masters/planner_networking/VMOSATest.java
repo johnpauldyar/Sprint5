@@ -3,8 +3,9 @@
  */
 package software_masters.planner_networking;
 
-import static org.junit.Assert.*;
 //import java.util.ArrayList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.rmi.RemoteException;
 
