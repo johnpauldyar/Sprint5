@@ -27,8 +27,8 @@ public class ClientView extends BorderPane
 	private Controller controller;
 	//private Registry registry;
 	
-	private TreeItem<Node> treeRoot,currNode;
-	private TreeView<Node> tree;
+	private TreeItem<Node> currNode;
+	private TreeView<Node> tree = new TreeView<Node>();
 	//private Node nodeRoot;
 
 	protected Scene scene;
@@ -96,8 +96,6 @@ public class ClientView extends BorderPane
 
 		plans = new ChoiceBox<PlanFile>();
 		controller.getPlans(plans);
-
-		tree = new TreeView<Node>(treeRoot);
 
 		chooseYear = new Button("Select");
 		chooseYear.setOnAction(e ->
