@@ -23,11 +23,11 @@
       <VBox prefHeight="509.0" prefWidth="180.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addChildButton" mnemonicParsing="false" onMouseClicked="#addBranch" text="Add New Child" />
-            <Button fx:id="RemoveButton" mnemonicParsing="false" onMouseClicked="#remove" text="Remove Current Branch" />
-            <Button fx:id="EditButton" mnemonicParsing="false" onMouseClicked="#edit" text="Edit" />
-            <Button fx:id="SaveButton" mnemonicParsing="false" onMouseClicked="#save" text="Save" />
-            <Button fx:id="CopyButton" mnemonicParsing="false" onMouseClicked="#copy" text="Use as Template" />
-            <Button fx:id="Logout" mnemonicParsing="false" onMouseClicked="#logout" text="Logout" />
+            <Button fx:id="removeButton" mnemonicParsing="false" onMouseClicked="#remove" text="Remove Current Branch" />
+            <Button fx:id="editButton" mnemonicParsing="false" onMouseClicked="#edit" text="Edit" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onMouseClicked="#save" text="Save" />
+            <Button fx:id="copyButton" mnemonicParsing="false" onMouseClicked="#copy" text="Use as Template" />
+            <Button fx:id="logout" mnemonicParsing="false" onMouseClicked="#logout" text="Logout" />
          </children>
       </VBox>
    </right>
