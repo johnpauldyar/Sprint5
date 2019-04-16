@@ -10,23 +10,23 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="944.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox prefHeight="28.0" prefWidth="886.0" BorderPane.alignment="CENTER">
          <children>
-            <ChoiceBox prefWidth="150.0" />
-            <Button mnemonicParsing="false" text="Select" />
+            <ChoiceBox fx:id="yearDropdown" prefWidth="150.0" />
+            <Button fx:id="yearSelectButton" mnemonicParsing="false" onMouseClicked="#planChange" text="Select" />
          </children>
       </HBox>
    </top>
    <right>
       <VBox prefHeight="509.0" prefWidth="180.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Add New Child" />
-            <Button mnemonicParsing="false" text="Remove Current Branch" />
-            <Button mnemonicParsing="false" text="Edit" />
-            <Button mnemonicParsing="false" text="Save" />
-            <Button mnemonicParsing="false" text="Use as Template" />
+            <Button fx:id="addChildButton" mnemonicParsing="false" onMouseClicked="#addBranch" text="Add New Child" />
+            <Button fx:id="RemoveButton" mnemonicParsing="false" onMouseClicked="#remove" text="Remove Current Branch" />
+            <Button fx:id="EditButton" mnemonicParsing="false" onMouseClicked="#edit" text="Edit" />
+            <Button fx:id="SaveButton" mnemonicParsing="false" onMouseClicked="#save" text="Save" />
+            <Button fx:id="CopyButton" mnemonicParsing="false" onMouseClicked="#copy" text="Use as Template" />
          </children>
       </VBox>
    </right>
@@ -37,8 +37,8 @@
                <children>
                   <Region prefHeight="200.0" prefWidth="200.0" />
                   <Label text="Fill in the Content Below" />
-                  <TextField minHeight="-Infinity" prefHeight="90.0" prefWidth="300.0" />
-                  <Button mnemonicParsing="false" text="&quot;Set Text" />
+                  <TextField fx:id="contentField" minHeight="-Infinity" prefHeight="90.0" prefWidth="300.0" />
+                  <Button fx:id="setContentButton" mnemonicParsing="false" onMouseClicked="#setText" text="Set Text" />
                   <Region prefHeight="200.0" prefWidth="200.0" />
                </children>
             </VBox>
@@ -47,14 +47,14 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <Label minWidth="-Infinity" prefWidth="200.0" text="Year: " />
-                  <TextField minWidth="-Infinity" prefWidth="200.0" />
-                  <Button mnemonicParsing="false" text="Submit New Year" />
+                  <TextField fx:id="newYearTxtField" minWidth="-Infinity" prefWidth="200.0" />
+                  <Button fx:id="enterNewYearButton" mnemonicParsing="false" onMouseClicked="#newPlan" text="Submit New Year" />
                </children>
             </HBox>
          </top>
       </BorderPane>
    </center>
    <left>
-      <TreeView prefHeight="504.0" prefWidth="214.0" BorderPane.alignment="CENTER" />
+      <TreeView fx:id="tree" onMouseClicked="#tree_SelectionChanged" prefHeight="504.0" prefWidth="214.0" BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>
