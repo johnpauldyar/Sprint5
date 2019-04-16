@@ -1,7 +1,7 @@
 package software_masters.planner_networking;
 
 import java.rmi.RemoteException;
-import java.rmi.registry.Registry;
+//import java.rmi.registry.Registry;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,26 +23,18 @@ import javafx.scene.layout.VBox;
 public class ClientView extends BorderPane
 {
 
-	Client client;
-	Controller controller;
-	TreeItem<Node> treeRoot;
-	TreeItem<Node> currNode;
-	TreeView<Node> tree;
-	Registry registry;
-	Node nodeRoot;
+	private Client client;
+	private Controller controller;
+	//private Registry registry;
+	
+	private TreeItem<Node> treeRoot,currNode;
+	private TreeView<Node> tree;
+	//private Node nodeRoot;
 
-	TextField dataTxt;
-	Button edit;
-	ChoiceBox<PlanFile> plans;
-	Button btn;
-	Scene scene;
-	Button chooseYear;
-	Button remove;
-	Button save;
-	Button temp;
-	Button copy;
-	TextField yearData;
-	Button subY;
+	protected Scene scene;
+	private TextField dataTxt, yearData;
+	private ChoiceBox<PlanFile> plans;
+	private Button btn, edit, chooseYear, remove, save, temp, copy, subY;
 
 	/**
 	 * Exhaustingly creates every button, pane,box, or field in the application

@@ -15,10 +15,10 @@ import javafx.stage.Stage;
 public class Driver extends Application
 {
 
-	Registry registry;
-	Client client;
-	Controller controller;
-	Stage stage;
+	private Registry registry;
+	private Client client;
+	private Controller controller;
+	private Stage stage;
 
 	/**
 	 * launches the javafx application
