@@ -56,6 +56,6 @@
       </BorderPane>
    </center>
    <left>
-      <TreeView fx:id="tree" onMouseClicked="#tree_SelectionChanged" prefHeight="504.0" prefWidth="214.0" BorderPane.alignment="CENTER" />
+      <TreeView fx:id="tree" prefHeight="504.0" prefWidth="214.0" BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>
