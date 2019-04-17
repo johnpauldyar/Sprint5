@@ -126,7 +126,10 @@ public class MainController {
 		confirm = ConfirmationBox.show("Do you want to save before you log out?", "Save", "Yes", "No");
 		if (confirm)
 		{
-			saveC(tree.getRoot().getValue(), yearDropdown.getValue().getYear());
+			if (tree.equals(null))
+			{
+				saveC(tree.getRoot().getValue(), yearDropdown.getValue().getYear());
+			}
 		}
     	vtmodel.showLogin();
     }
@@ -200,12 +203,6 @@ public class MainController {
 			this.currNode = item;
 		}
     }
-    
-    
-    
-    
-    
-    
     
     /**
 	 * Gets the plans of the department for display in a choiceBox
