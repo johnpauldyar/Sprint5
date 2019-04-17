@@ -39,7 +39,7 @@
                   <Region prefHeight="200.0" prefWidth="200.0" />
                   <Label text="Fill in the Content Below" />
                   <TextField fx:id="contentField" minHeight="-Infinity" prefHeight="90.0" prefWidth="300.0" />
-                  <Button fx:id="setContentButton" mnemonicParsing="false" onMouseClicked="#setText" text="Set Text" />
+                  <Button fx:id="setContentButton" disable="true" mnemonicParsing="false" onMouseClicked="#setText" text="Set Text" />
                   <Region prefHeight="200.0" prefWidth="200.0" />
                </children>
             </VBox>
@@ -48,8 +48,8 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <Label minWidth="-Infinity" prefWidth="200.0" text="Year: " />
-                  <TextField fx:id="newYearTxtField" minWidth="-Infinity" prefWidth="200.0" />
-                  <Button fx:id="enterNewYearButton" mnemonicParsing="false" onMouseClicked="#newPlan" text="Submit New Year" />
+                  <TextField fx:id="newYearTxtField" disable="true" editable="false" minWidth="-Infinity" prefWidth="200.0" />
+                  <Button fx:id="enterNewYearButton" disable="true" mnemonicParsing="false" onMouseClicked="#newPlan" text="Submit New Year" />
                </children>
             </HBox>
          </top>

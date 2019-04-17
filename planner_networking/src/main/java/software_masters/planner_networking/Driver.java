@@ -90,7 +90,8 @@ public class Driver extends Application implements ViewTransitionalModel
 	public void closing() throws RemoteException
 	{
 		boolean confirm = false;
-		confirm = ConfirmationBox.show("Are you sure you want to quit?", "Confirmation", "Yes", "No");
+		confirm = ConfirmationBox.show("Are you sure you want to quit? \n"
+				+ "Unsaved data will not be saved ", "Confirmation", "Yes", "No");
 		if (confirm)
 		{
 			client.getServer().save();

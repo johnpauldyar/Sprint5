@@ -126,7 +126,7 @@ public class MainController {
 		confirm = ConfirmationBox.show("Do you want to save before you log out?", "Save", "Yes", "No");
 		if (confirm)
 		{
-			if (tree.equals(null))
+			if (!(tree.equals(null)))
 			{
 				saveC(tree.getRoot().getValue(), yearDropdown.getValue().getYear());
 			}
