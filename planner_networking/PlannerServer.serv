@@ -6,28 +6,35 @@
     <string>0</string>
     <void id="Department0" property="department">
      <void id="ConcurrentHashMap1" property="planFileMap">
-      <void id="PlanFile0" method="get">
-       <string>2019</string>
-       <void id="Centre0" property="plan">
-        <void property="name">
-         <null/>
+      <void method="put">
+       <string>2009</string>
+       <object class="software_masters.planner_networking.PlanFile">
+        <void property="canEdit">
+         <boolean>true</boolean>
         </void>
-        <void id="Node0" property="root">
-         <void id="ArrayList0" property="children">
-          <void id="Node1" index="0">
-           <void id="ArrayList1" property="children">
-            <void id="Node2" index="0">
-             <void id="ArrayList2" property="children">
-              <void id="Node3" index="0">
-               <void id="ArrayList3" property="children">
-                <void index="0">
+        <void property="plan">
+         <object class="software_masters.planner_networking.Centre" id="Centre0">
+          <void id="Node0" property="root">
+           <void id="ArrayList0" property="children">
+            <void id="Node1" index="0">
+             <void id="ArrayList1" property="children">
+              <void id="Node2" index="0">
+               <void id="ArrayList2" property="children">
+                <void id="Node3" index="0">
+                 <void id="ArrayList3" property="children">
+                  <void index="0">
+                   <void property="data">
+                    <string>Passing sprint 1 grade</string>
+                   </void>
+                  </void>
+                 </void>
                  <void property="data">
-                  <string>Passing sprint 1 grade</string>
+                  <string>Sprint 1</string>
                  </void>
                 </void>
                </void>
                <void property="data">
-                <string>Sprint 1</string>
+                <string>Learn how to use eclipse</string>
                </void>
               </void>
               <void method="add">
@@ -54,13 +61,13 @@
                  <string>Assessment Process</string>
                 </void>
                 <void property="parent">
-                 <object idref="Node2"/>
+                 <object idref="Node1"/>
                 </void>
                </object>
               </void>
              </void>
              <void property="data">
-              <string>Learn how to use eclipse</string>
+              <string>Our goal is to ensure that I get credit for this class.</string>
              </void>
             </void>
             <void method="add">
@@ -102,9 +109,78 @@
                <string>Learning Objective</string>
               </void>
               <void property="parent">
-               <object idref="Node1"/>
+               <object idref="Node0"/>
               </void>
              </object>
+            </void>
+           </void>
+           <void property="data">
+            <string>Our mission is to pass this class hopefully now</string>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="year">
+         <string>2009</string>
+        </void>
+       </object>
+      </void>
+      <void id="PlanFile0" method="get">
+       <string>2019</string>
+       <void id="Centre1" property="plan">
+        <void property="name">
+         <null/>
+        </void>
+        <void id="Node7" property="root">
+         <void id="ArrayList4" property="children">
+          <void id="Node8" index="0">
+           <void id="ArrayList5" property="children">
+            <void id="Node9" index="0">
+             <void id="ArrayList6" property="children">
+              <void id="Node10" index="0">
+               <void id="ArrayList7" property="children">
+                <void index="0">
+                 <void property="data">
+                  <string>Passing sprint 1 grade</string>
+                 </void>
+                </void>
+               </void>
+               <void property="data">
+                <string>Sprint 1</string>
+               </void>
+              </void>
+              <void method="add">
+               <object class="software_masters.planner_networking.Node" id="Node11">
+                <void property="children">
+                 <void method="add">
+                  <object class="software_masters.planner_networking.Node">
+                   <void property="data">
+                    <string>Passing sprint 2</string>
+                   </void>
+                   <void property="name">
+                    <string>Results</string>
+                   </void>
+                   <void property="parent">
+                    <object idref="Node11"/>
+                   </void>
+                  </object>
+                 </void>
+                </void>
+                <void property="data">
+                 <string>Sprint 2</string>
+                </void>
+                <void property="name">
+                 <string>Assessment Process</string>
+                </void>
+                <void property="parent">
+                 <object idref="Node9"/>
+                </void>
+               </object>
+              </void>
+             </void>
+             <void property="data">
+              <string>Learn how to use eclipse</string>
+             </void>
             </void>
            </void>
            <void property="data">
@@ -113,7 +189,7 @@
           </void>
          </void>
          <void property="data">
-          <string>Our mission is to pass this class hopefully now</string>
+          <string>Our mission is to pass this class excellently</string>
          </void>
         </void>
        </void>
@@ -125,15 +201,15 @@
          <boolean>true</boolean>
         </void>
         <void property="plan">
-         <object class="software_masters.planner_networking.Centre" id="Centre1">
-          <void id="Node7" property="root">
-           <void id="ArrayList4" property="children">
-            <void id="Node8" index="0">
-             <void id="ArrayList5" property="children">
-              <void id="Node9" index="0">
-               <void id="ArrayList6" property="children">
-                <void id="Node10" index="0">
-                 <void id="ArrayList7" property="children">
+         <object class="software_masters.planner_networking.Centre" id="Centre2">
+          <void id="Node12" property="root">
+           <void id="ArrayList8" property="children">
+            <void id="Node13" index="0">
+             <void id="ArrayList9" property="children">
+              <void id="Node14" index="0">
+               <void id="ArrayList10" property="children">
+                <void id="Node15" index="0">
+                 <void id="ArrayList11" property="children">
                   <void index="0">
                    <void property="data">
                     <string>Result 2018</string>
@@ -155,13 +231,13 @@
              </void>
             </void>
             <void method="add">
-             <object class="software_masters.planner_networking.Node" id="Node11">
+             <object class="software_masters.planner_networking.Node" id="Node16">
               <void property="children">
                <void method="add">
-                <object class="software_masters.planner_networking.Node" id="Node12">
+                <object class="software_masters.planner_networking.Node" id="Node17">
                  <void property="children">
                   <void method="add">
-                   <object class="software_masters.planner_networking.Node" id="Node13">
+                   <object class="software_masters.planner_networking.Node" id="Node18">
                     <void property="children">
                      <void method="add">
                       <object class="software_masters.planner_networking.Node">
@@ -172,7 +248,7 @@
                         <string>Results</string>
                        </void>
                        <void property="parent">
-                        <object idref="Node13"/>
+                        <object idref="Node18"/>
                        </void>
                       </object>
                      </void>
@@ -184,7 +260,7 @@
                      <string>Assessment Process</string>
                     </void>
                     <void property="parent">
-                     <object idref="Node12"/>
+                     <object idref="Node17"/>
                     </void>
                    </object>
                   </void>
@@ -196,7 +272,7 @@
                   <string>Learning Objective</string>
                  </void>
                  <void property="parent">
-                  <object idref="Node11"/>
+                  <object idref="Node16"/>
                  </void>
                 </object>
                </void>
@@ -208,7 +284,7 @@
                <string>Goal</string>
               </void>
               <void property="parent">
-               <object idref="Node7"/>
+               <object idref="Node12"/>
               </void>
              </object>
             </void>

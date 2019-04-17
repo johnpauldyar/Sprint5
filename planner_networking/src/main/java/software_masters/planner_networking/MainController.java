@@ -153,7 +153,7 @@ public class MainController {
 			saveButton.setDisable(false);
 		} else
 		{
-			System.out.println("Please enter a valid year");
+			System.out.println("Please enter a valid year please");
 		}
 
     }
