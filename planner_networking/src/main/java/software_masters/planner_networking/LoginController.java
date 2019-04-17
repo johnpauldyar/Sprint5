@@ -1,19 +1,15 @@
 package software_masters.planner_networking;
 
-import java.io.IOException;
-import java.rmi.RemoteException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
-public class LoginController {
+public class LoginController
+{
 
 	private Client client;
 	
@@ -38,6 +34,8 @@ public class LoginController {
     @FXML
     private Button loginButton;
     
+    @FXML
+    private Label badLogin;
     
     ViewTransitionalModel vtmodel;
     
@@ -54,32 +52,58 @@ public class LoginController {
     @FXML
     public void loginPress(ActionEvent event) throws Exception
     {
+    	userError.setVisible(false);
+    	passError.setVisible(false);
+    	hostError.setVisible(false);
+    	badLogin.setVisible(false);
     	
     	String user = userText.getText();
     	String pass = passText.getText();
     	String host = hostText.getText();
     	
-    	if (user.equals(null))
+    	if (user.equals("") || pass.equals("") || host.equals(""))
     	{
-    		userError.setVisible(true);
-    	}
-    	else if (pass.equals(null))
-    	{
-    		passError.setVisible(true);
-    	}
-    	else if (host.equals(null))
-    	{
-    		hostError.setVisible(true);
+    		if (user.equals(""))
+    		{
+    			userError.setVisible(true);
+    		}
+    		if (pass.equals(""))
+	    	{
+	    		passError.setVisible(true);
+	    	}
+    		if (host.equals(""))
+	    	{
+	    		hostError.setVisible(true);
+	    	}
     	}
     	else
     	{
-    		// TODO set server somehow //
-    		client.login(user, pass);
-    		// TODO reset scene and switch to ClientView
-    		vtmodel.showMainView();
     		
-    
+    		try
+			{
+				// TODO set server somehow //
+				client.login(user, pass);
+				// TODO reset scene and switch to ClientView
+				vtmodel.showMainView();
+			} catch (IllegalArgumentException e)
+			{
+				badLogin.setVisible(true);
+			}
     	}
+    }
+    
+    /**
+     * This function handles the user pressing "ENTER" at the login screen
+     * @param e KeyEvent
+     * @throws Exception 
+     */
+    @FXML
+    public void buttonPressed(KeyEvent e) throws Exception
+    {
+        if(e.getCode().toString().equals("ENTER"))
+        {
+            loginPress(null);
+        }
     }
 
 	/**

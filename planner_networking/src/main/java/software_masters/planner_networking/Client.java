@@ -44,7 +44,7 @@ public class Client
 	{
 		currPlanFile = null;
 		currNode = null;
-		cookie = server.logIn(username, password);
+		cookie = server.login(username, password);
 	}
 
 	/**

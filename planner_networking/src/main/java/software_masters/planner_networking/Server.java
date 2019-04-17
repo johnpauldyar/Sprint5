@@ -24,7 +24,7 @@ public interface Server extends Remote
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	String logIn(String username, String password) throws IllegalArgumentException, RemoteException;
+	String login(String username, String password) throws IllegalArgumentException, RemoteException;
 
 	/**
 	 * Returns planFile object from the user's department given a year. Throws

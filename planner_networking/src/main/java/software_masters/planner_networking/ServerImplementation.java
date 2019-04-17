@@ -94,7 +94,7 @@ public class ServerImplementation implements Server
 	 * java.lang.String)
 	 */
 
-	public String logIn(String username, String password)
+	public String login(String username, String password)
 	{
 		if (!loginMap.containsKey(username))// checks username is valid
 		{

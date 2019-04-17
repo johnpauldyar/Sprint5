@@ -20,8 +20,8 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Select Host:" />
-                  <TextField fx:id="hostText" />
-                  <Label fx:id="hostError" text="*" textFill="RED" visible="false" />
+                  <TextField fx:id="hostText" onKeyPressed="#buttonPressed" text="localhost" />
+                  <Label fx:id="hostError" text="*required" textFill="RED" visible="false" />
                </children>
                <VBox.margin>
                   <Insets top="30.0" />
@@ -35,29 +35,41 @@
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="546.0">
                <children>
                   <Label text="Username:" />
-                  <TextField fx:id="userText">
+                  <TextField fx:id="userText" onKeyPressed="#buttonPressed">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <Label fx:id="userError" text="*" textFill="RED" visible="false" />
+                  <Label fx:id="userError" text="*required" textFill="RED" visible="false" />
                   <Region prefHeight="200.0" prefWidth="200.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="49.0" prefWidth="546.0">
                <children>
                   <Label text="Password:" />
-                  <PasswordField fx:id="passText">
+                  <PasswordField fx:id="passText" onKeyPressed="#buttonPressed">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                   </PasswordField>
-                  <Label fx:id="passError" text="*" textFill="RED" visible="false" />
+                  <Label fx:id="passError" text="*required" textFill="RED" visible="false" />
                   <Region prefHeight="42.0" prefWidth="194.0" />
                </children>
             </HBox>
             <Region prefHeight="20.0" prefWidth="546.0" />
-            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginPress" text="Login" textAlignment="CENTER" />
+            <HBox alignment="CENTER" prefHeight="26.0" prefWidth="481.0">
+               <children>
+                  <Label fx:id="badLogin" text="*Invalid username and/or password" textFill="RED" visible="false" />
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginPress" text="Login" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets left="10.0" right="230.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
             <Separator prefHeight="0.0" prefWidth="546.0">
                <padding>
                   <Insets top="20.0" />
