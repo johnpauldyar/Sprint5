@@ -1,5 +1,11 @@
 package software_masters.planner_networking;
 
+
+import static org.junit.Assert.assertTrue;
+//import static org.testfx.assertions.api.Assertions.assertThat;
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.control.LabeledMatchers.hasText;
+
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -9,6 +15,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import org.junit.Before;
@@ -22,6 +29,7 @@ public class GUITest extends ApplicationTest{
 	private LoginController controller;
 	private MainController mainController;
 	private Stage stage;
+	private Scene scene;
 
 	
 	
@@ -41,6 +49,8 @@ public class GUITest extends ApplicationTest{
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
+		stage=primaryStage;
+		scene=stage.getScene();
 		primaryStage.show();
 	}
 	
@@ -51,8 +61,16 @@ public class GUITest extends ApplicationTest{
 		write("user");
 		clickOn("#passText");
 		write("user");
+		TextField t=(TextField)scene.lookup("#hostText");
+		assertTrue(t.getText().equals("localhost"));
+	}
+	
+	@Test
+	public void loginTest()
+	{
 		clickOn("#loginButton");
-		assertTrue("#mainBorderPane")
+		//TextField t=(TextField)scene.lookup("#hostText");
+		//assertTrue(t.getText().equals("localhost"));
 	}
 	
 	
