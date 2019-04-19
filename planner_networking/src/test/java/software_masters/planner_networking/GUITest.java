@@ -15,10 +15,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -33,8 +36,8 @@ public class GUITest extends ApplicationTest{
 
 	
 	
-	@Before
-	public void setUpClass() throws Exception
+	@BeforeClass
+	public static void setUpClass() throws Exception
 	{
 		ServerImplementation.main(null);
 		ApplicationTest.launch(Driver.class);
@@ -50,13 +53,14 @@ public class GUITest extends ApplicationTest{
 	public void start(Stage primaryStage) throws Exception
 	{
 		stage=primaryStage;
-		scene=stage.getScene();
+		
 		primaryStage.show();
 	}
 	
 	@Test
 	public void startTest()
 	{
+		scene=stage.getScene();
 		clickOn("#userText");
 		write("user");
 		clickOn("#passText");
@@ -66,11 +70,14 @@ public class GUITest extends ApplicationTest{
 	}
 	
 	@Test
-	public void loginTest()
+	public void selectYearTest()
 	{
 		clickOn("#loginButton");
-		//TextField t=(TextField)scene.lookup("#hostText");
-		//assertTrue(t.getText().equals("localhost"));
+		clickOn("#yearDropDown");
+		type(KeyCode.DOWN);
+		type(KeyCode.ENTER);
+		ChoiceBox ydd=(ChoiceBox)scene.lookup("#yearDropDown");
+		assertTrue(ydd.getSelectionModel().getSelectedItem().equals("localhost"));
 	}
 	
 	
