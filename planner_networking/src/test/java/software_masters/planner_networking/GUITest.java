@@ -70,6 +70,18 @@ public class GUITest extends ApplicationTest{
 	}
 	
 	@Test
+	public void testEmptyHost()
+	{
+	 scene = stage.getScene();
+	 
+	 clickOn("#hostText");
+	 clickOn("#hostText");
+	 type(KeyCode.BACK_SPACE);
+	 
+	 
+	}
+	
+	@Test
 	public void selectYearTest()
 	{
 		clickOn("#loginButton");
@@ -77,7 +89,7 @@ public class GUITest extends ApplicationTest{
 		type(KeyCode.DOWN);
 		type(KeyCode.ENTER);
 		ChoiceBox ydd=(ChoiceBox)scene.lookup("#yearDropDown");
-		assertTrue(ydd.getSelectionModel().getSelectedItem().equals("localhost"));
+		assertTrue(ydd.getSelectionModel().getSelectedItem().toString().equals("localhost"));
 	}
 	
 	
