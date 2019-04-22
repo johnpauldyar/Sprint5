@@ -1,40 +1,24 @@
 package software_masters.planner_networking;
 
 
-import static org.junit.Assert.assertTrue;
-//import static org.testfx.assertions.api.Assertions.assertThat;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
+import static org.junit.Assert.*;
+import org.junit.After;
 
-import java.io.IOException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+import org.junit.*;
+import org.testfx.framework.junit.ApplicationTest;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.testfx.framework.junit.ApplicationTest;
-
 public class LoginTest extends ApplicationTest{
 
-	private Registry registry;
-	private Client client;
-	private LoginController controller;
-	private MainController mainController;
-	private Stage stage;
 	private Scene scene;
-
 	
+	private TextField t;
+	private Label l;
 	
 	@BeforeClass
 	public static void setUpClass() throws Exception
@@ -42,41 +26,66 @@ public class LoginTest extends ApplicationTest{
 		ServerImplementation.main(null);
 		ApplicationTest.launch(Driver.class);
 	}
-	/*
+	
+	/**
 	 * Connects to the server and houses the primary stage of the application
-	 * 
-	 * (non-Javadoc)
 	 * 
 	 * @see javafx.application.Application#start(javafx.stage.Stage)
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
-		stage=primaryStage;
 		primaryStage.show();
+		
+		scene=primaryStage.getScene();
+	}
+
+	/**
+	 * This method resets the text fields to their initial states
+	 */
+	@After
+	public void reset()
+	{
+		clickOn("#hostText");
+		clickOn("#hostText");
+		type(KeyCode.BACK_SPACE);
+		write("localhost");
+		
+		clickOn("#userText");
+		clickOn("#userText");
+		type(KeyCode.BACK_SPACE);
+		
+		clickOn("#passText");
+		clickOn("#passText");
+		type(KeyCode.BACK_SPACE);
 	}
 	
 	@Test
 	public void testStart()
-	{
-		scene=stage.getScene();
-		clickOn("#userText");
-		write("user");
-		clickOn("#passText");
-		write("user");
-		TextField t=(TextField)scene.lookup("#hostText");
+	{		
+		t=(TextField)scene.lookup("#hostText");
 		assertTrue(t.getText().equals("localhost"));
+		
+		t = (TextField)scene.lookup("#userText");
+		assertTrue(t.getText().isEmpty());
+		
+		t = (TextField)scene.lookup("#passText");
+		assertTrue(t.getText().isEmpty());
 	}
 	
 	@Test
-	public void testEmptyHost()
+	public void testFailHost()
 	{
-	 scene = stage.getScene();
-	 
-	 clickOn("#hostText");
-	 clickOn("#hostText");
-	 type(KeyCode.BACK_SPACE);
-	 
-	 
+		clickOn("#hostText");
+	 	clickOn("#hostText");
+	 	type(KeyCode.BACK_SPACE);
+	 	
+	 	l = (Label)scene.lookup("#hostError");
+	 	
+	 	assertFalse(l.isVisible());
+	 	
+	 	clickOn("#loginButton");
+	 	
+	 	assertTrue(l.isVisible());
 	}
 }
