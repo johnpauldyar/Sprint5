@@ -79,18 +79,4 @@ public class LoginTest extends ApplicationTest{
 	 
 	 
 	}
-	
-	@Test
-	public void testSelectYear()
-	{
-		clickOn("#loginButton");
-		clickOn("#yearDropdown");
-		type(KeyCode.DOWN);
-		type(KeyCode.ENTER);
-		ChoiceBox ydd=(ChoiceBox)scene.lookup("#yearDropdown");
-		assertTrue(ydd.getSelectionModel().getSelectedItem().toString().equals("localhost"));
-	}
-	
-	
-
 }

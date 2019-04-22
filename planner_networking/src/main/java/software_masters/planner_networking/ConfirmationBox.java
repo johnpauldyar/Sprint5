@@ -41,10 +41,12 @@ public class ConfirmationBox
 		Button btnYes = new Button();
 		btnYes.setText(textYes);
 		btnYes.setOnAction(e -> btnYes_Clicked());
+		btnYes.setId("yes");
 
 		Button btnNo = new Button();
 		btnNo.setText(textNo);
 		btnNo.setOnAction(e -> btnNo_Clicked());
+		btnNo.setId("no");
 
 		HBox paneBtn = new HBox(20);
 		paneBtn.getChildren().addAll(btnYes, btnNo);

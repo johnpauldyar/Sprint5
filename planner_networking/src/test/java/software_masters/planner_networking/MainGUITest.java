@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -55,14 +56,29 @@ public class MainGUITest extends ApplicationTest {
 		write("user");
 		clickOn("#passText");
 		write("user");
+		clickOn("#loginButton");
+	}
+	
+	@After
+	public void logout()
+	{
+		clickOn("#logout");
+		scene=stage.getScene();
+		clickOn("#no");
+		scene=stage.getScene();
 	}
 	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testSelectYear()
+	{
+		clickOn("#yearDropdown");
+		type(KeyCode.DOWN);
+		type(KeyCode.ENTER);
+		clickOn("#yearSelectButton");
+		PlanFile plan=((ChoiceBox<PlanFile>)scene.lookup("#yearDropdown")).getValue();
+		String txt=plan.getYear();
+		System.out.println(txt);
+		assertTrue(txt.equals("2009"));
+		
 	}
-
-	@Override
-	
-
 }
