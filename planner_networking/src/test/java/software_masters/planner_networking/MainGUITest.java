@@ -16,6 +16,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -68,17 +70,60 @@ public class MainGUITest extends ApplicationTest {
 		scene=stage.getScene();
 	}
 	
+	public void typeDown(int x)
+	{
+		if(x>0)
+		{
+			for(int i=0; i<x;i++)
+			{
+				type(KeyCode.DOWN);
+			}
+		}
+		else
+		{
+			for(int i=0; i>x;i--)
+			{
+				type(KeyCode.UP);
+			}
+		}
+	}
+	
+	public void selectYear(int index)
+	{
+		clickOn("#yearDropdown");
+		typeDown(index);
+		type(KeyCode.ENTER);
+		clickOn("#yearSelectButton");
+	}
+	
 	@Test
 	public void testSelectYear()
 	{
-		clickOn("#yearDropdown");
-		type(KeyCode.DOWN);
-		type(KeyCode.ENTER);
-		clickOn("#yearSelectButton");
-		PlanFile plan=((ChoiceBox<PlanFile>)scene.lookup("#yearDropdown")).getValue();
-		String txt=plan.getYear();
-		System.out.println(txt);
-		assertTrue(txt.equals("2009"));
+		scene=stage.getScene();
+		
+		TextField field=(TextField)scene.lookup("#newYearTxtField");
+		assertTrue((field.isDisable()));
+		
+		//check first year is correct
+		selectYear(1);
+		clickOn("#tree");
+		typeDown(10);
+		field=(TextField)scene.lookup("#contentField");
+		assertTrue(field.getText().equals("Git abilities"));
+		
+		//and the second year
+		selectYear(1);
+		clickOn("#tree");
+		typeDown(10);
+		field=(TextField)scene.lookup("#contentField");
+		assertTrue(field.getText().equals("Passing sprint 2"));
+		
+		//and first again
+		selectYear(-1);
+		clickOn("#tree");
+		typeDown(10);
+		field=(TextField)scene.lookup("#contentField");
+		assertTrue(field.getText().equals("Git abilities"));
 		
 	}
 }
