@@ -72,6 +72,7 @@ public class LoginTest extends ApplicationTest{
 		
 		clickOn("#loginButton");
 		clickOn("#logout");
+		clickOn("#yes");
 	}
 	
 	@Test

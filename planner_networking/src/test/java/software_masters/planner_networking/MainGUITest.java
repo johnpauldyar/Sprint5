@@ -71,37 +71,6 @@ public class MainGUITest extends ApplicationTest {
 		scene=stage.getScene();
 	}
 	
-	@Test
-	public void testSelectYear()
-	{
-		scene=stage.getScene();
-		
-		TextField field=(TextField)scene.lookup("#newYearTxtField");
-		assertTrue(!(field.isEditable()));
-		
-		//check first year is correct
-		selectYear(1);
-		clickOn("#tree");
-		typeDown(10);
-		field=(TextField)scene.lookup("#contentField");
-		assertTrue(field.getText().equals("Git abilities"));
-		
-		//and the second year
-		selectYear(1);
-		clickOn("#tree");
-		typeDown(10);
-		field=(TextField)scene.lookup("#contentField");
-		assertTrue(field.getText().equals("Passing sprint 2"));
-		
-		//and first again
-		selectYear(-1);
-		clickOn("#tree");
-		typeDown(10);
-		field=(TextField)scene.lookup("#contentField");
-		assertTrue(field.getText().equals("Git abilities"));
-		
-	}
-	
 	public void typeDown(int x)
 	{ 
 		if(x>0)
@@ -164,7 +133,7 @@ public class MainGUITest extends ApplicationTest {
 		scene=stage.getScene();
 		//some buttons should be unclickable
 		TextField field=(TextField)scene.lookup("#newYearTxtField");
-		assertTrue((field.isEditable()));
+		assertTrue(!(field.isEditable()));
 		viewButtons();
 		
 		//check first year is correct
@@ -247,7 +216,6 @@ public class MainGUITest extends ApplicationTest {
 		clickOn("#contentField");
 		clickOn("#contentField");
 		write("first edit");
-		clickOn("#setContentButton");
 		clickOn("#tree");
 		typeDown(20);
 		typeDown(-1);
@@ -270,8 +238,8 @@ public class MainGUITest extends ApplicationTest {
 		typeDown(4);
 		clickOn("#removeButton");
 		clickOn("#tree");
-		typeDown(1);
 		typeDown(-1);
+		typeDown(1);
 		TextField field=(TextField)scene.lookup("#contentField");
 		assertTrue(field.getText().equals("Result 2018"));
 		typeDown(-2);
@@ -280,6 +248,7 @@ public class MainGUITest extends ApplicationTest {
 		typeDown(3);
 		clickOn("#removeButton");
 		clickOn("#tree");
+		typeDown(20);
 		field=(TextField)scene.lookup("#contentField");
 		System.out.println(field.getText());
 		assertTrue(field.getText().equals("Result 2018"));
@@ -289,7 +258,25 @@ public class MainGUITest extends ApplicationTest {
 	public void testCopy()
 	{
 		scene=stage.getScene();
-		selectYear(3);
+		selectYear(2);
 		clickOn("#editButton");
+		clickOn("#newYearTxtField");
+		write("2020");
+		clickOn("enterNewYearButton");
+		selectYear(4);
+		clickOn("#tree");
+		typeDown(20);
+		TextField field=(TextField)scene.lookup("#contentField");
+		assertTrue(field.getText().equals("Passing sprint 2"));
+		clickOn("#contentField");
+		clickOn("#contentField");
+		clickOn("#contentField");
+		write("edit 1");
+		selectYear(-4);
+		clickOn("#tree");
+		typeDown(20);
+		field=(TextField)scene.lookup("#contentField");
+		assertTrue(field.getText().equals("Passing sprint 2"));
+		
 	}
 }
