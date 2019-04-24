@@ -91,6 +91,8 @@ public class MainGUITest extends ApplicationTest {
 	
 	public void editableButtons()
 	{
+		clickOn("#tree");
+		type(KeyCode.DOWN);
 		Button add=(Button)scene.lookup("#addChildButton");
 		Button remove=(Button)scene.lookup("#removeButton");
 		Button save=(Button)scene.lookup("#saveButton");
@@ -103,6 +105,8 @@ public class MainGUITest extends ApplicationTest {
 		assertTrue(!(copy.isDisabled()));
 		assertTrue((submityear.isDisabled()));
 		assertTrue(!(edit.isDisabled()));
+		clickOn("#tree");
+		type(KeyCode.UP);
 	}
 	
 	public void viewButtons()
