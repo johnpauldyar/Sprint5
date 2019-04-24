@@ -41,23 +41,37 @@ public class LoginTest extends ApplicationTest{
 	}
 
 	/**
-	 * This method resets the text fields to their initial states
+	 * This method logs in and back out to reset the login screen
 	 */
 	@After
 	public void reset()
 	{
-		clickOn("#hostText");
-		clickOn("#hostText");
-		type(KeyCode.BACK_SPACE);
-		write("localhost");
+		t=(TextField)scene.lookup("#hostText");
+		if (!t.getText().equals("localhost"))
+		{
+			clickOn("#hostText");
+			clickOn("#hostText");
+			write("localhost");
+		}
 		
-		clickOn("#userText");
-		clickOn("#userText");
-		type(KeyCode.BACK_SPACE);
+		t=(TextField)scene.lookup("#userText");
+		if (!t.getText().equals("user"))
+		{
+			clickOn("#userText");
+			clickOn("#userText");
+			write("user");
+		}
 		
-		clickOn("#passText");
-		clickOn("#passText");
-		type(KeyCode.BACK_SPACE);
+		t=(TextField)scene.lookup("#passText");
+		if (!t.getText().equals("user"))
+		{
+			clickOn("#passText");
+			clickOn("#passText");
+			write("user");
+		}
+		
+		clickOn("#loginButton");
+		clickOn("#logout");
 	}
 	
 	@Test
@@ -80,7 +94,59 @@ public class LoginTest extends ApplicationTest{
 	 	clickOn("#hostText");
 	 	type(KeyCode.BACK_SPACE);
 	 	
+	 	clickOn("#userText");
+		write("user");
+	 	clickOn("#passText");
+		write("user");
+	 	
 	 	l = (Label)scene.lookup("#hostError");
+	 	
+	 	assertFalse(l.isVisible());
+	 	
+	 	clickOn("#loginButton");
+	 	
+	 	assertTrue(l.isVisible());
+	}
+	
+	@Test
+	public void testFailUser()
+	{
+		clickOn("#passText");
+		write("user");
+	 	
+	 	l = (Label)scene.lookup("#userError");
+	 	
+	 	assertFalse(l.isVisible());
+	 	
+	 	clickOn("#loginButton");
+	 	
+	 	assertTrue(l.isVisible());
+	}
+	
+	@Test
+	public void testFailPass()
+	{
+		clickOn("#userText");
+		write("user");
+	 	
+	 	l = (Label)scene.lookup("#passError");
+	 	
+	 	assertFalse(l.isVisible());
+	 	
+	 	clickOn("#loginButton");
+	 	
+	 	assertTrue(l.isVisible());
+	}
+	
+	@Test
+	public void testInvalidLogin()
+	{
+		clickOn("#userText");
+		write(" ");
+		clickOn("#passText");
+		write(" ");
+	 	
+	 	l = (Label)scene.lookup("#badLogin");
 	 	
 	 	assertFalse(l.isVisible());
 	 	
