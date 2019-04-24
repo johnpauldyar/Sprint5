@@ -3,6 +3,7 @@ package software_masters.planner_networking;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -57,6 +58,8 @@ public class MainController {
     private TreeItem<Node> currNode;
     
     ViewTransitionalModel vtmodel;
+    
+    ChangeListener<String> listener;
     
     public void setViewTransitionalModel(ViewTransitionalModel model)
     {
@@ -188,24 +191,31 @@ public class MainController {
     @FXML
     void save(MouseEvent event) throws RemoteException 
     {
-		currNode.getValue().setData(contentField.getText());
 		saveC(tree.getRoot().getValue(), yearDropdown.getValue().getYear());
     }
 
-    @FXML
-    void setText(MouseEvent event) 
+    void setText(String newvalue) 
     {
-		currNode.getValue().setData(contentField.getText());
+		currNode.getValue().setData(newvalue);
     }
 
     void tree_SelectionChanged(TreeItem<Node> item)
     {
+    	if (listener != null)
+    	{
+    		contentField.textProperty().removeListener(listener);
+    	}
+
 		if (item != null)
 		{
 			String str = item.getValue().getData();
 			contentField.setText(str);
 			this.currNode = item;
 		}
+		listener = (observable,oldvalue,newvalue) -> setText(newvalue);
+		contentField.textProperty().addListener(listener);
+		
+
 		
     }
     

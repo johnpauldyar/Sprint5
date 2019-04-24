@@ -307,7 +307,20 @@
          <boolean>true</boolean>
         </void>
         <void property="plan">
-         <object class="software_masters.planner_networking.Centre"/>
+         <object class="software_masters.planner_networking.Centre" id="Centre3">
+          <void id="Node19" property="root">
+           <void id="ArrayList12" property="children">
+            <void index="0">
+             <void property="data">
+              <string>Goal 2016</string>
+             </void>
+            </void>
+           </void>
+           <void property="data">
+            <string>Mission 2016</string>
+           </void>
+          </void>
+         </object>
         </void>
         <void property="year">
          <string>2016</string>

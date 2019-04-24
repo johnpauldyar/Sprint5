@@ -39,7 +39,6 @@
                   <Region prefHeight="200.0" prefWidth="200.0" />
                   <Label text="Fill in the Content Below" />
                   <TextField fx:id="contentField" minHeight="-Infinity" prefHeight="90.0" prefWidth="300.0" />
-                  <Button fx:id="setContentButton" disable="true" mnemonicParsing="false" onMouseClicked="#setText" text="Set Text" />
                   <Region prefHeight="200.0" prefWidth="200.0" />
                </children>
             </VBox>
