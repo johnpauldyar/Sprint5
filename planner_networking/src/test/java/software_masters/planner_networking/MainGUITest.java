@@ -43,7 +43,7 @@ public class MainGUITest extends ApplicationTest {
 		ApplicationTest.launch(Driver.class);
 	}
 	
-	
+	@Override
 	public void start(Stage stage) throws Exception
 	{
 		this.stage=stage;
@@ -70,8 +70,39 @@ public class MainGUITest extends ApplicationTest {
 		scene=stage.getScene();
 	}
 	
-	public void typeDown(int x)
+	@Test
+	public void testSelectYear()
 	{
+		scene=stage.getScene();
+		
+		TextField field=(TextField)scene.lookup("#newYearTxtField");
+		assertTrue(!(field.isEditable()));
+		
+		//check first year is correct
+		selectYear(1);
+		clickOn("#tree");
+		typeDown(10);
+		field=(TextField)scene.lookup("#contentField");
+		assertTrue(field.getText().equals("Git abilities"));
+		
+		//and the second year
+		selectYear(1);
+		clickOn("#tree");
+		typeDown(10);
+		field=(TextField)scene.lookup("#contentField");
+		assertTrue(field.getText().equals("Passing sprint 2"));
+		
+		//and first again
+		selectYear(-1);
+		clickOn("#tree");
+		typeDown(10);
+		field=(TextField)scene.lookup("#contentField");
+		assertTrue(field.getText().equals("Git abilities"));
+		
+	}
+	
+	public void typeDown(int x)
+	{ 
 		if(x>0)
 		{
 			for(int i=0; i<x;i++)
@@ -96,34 +127,5 @@ public class MainGUITest extends ApplicationTest {
 		clickOn("#yearSelectButton");
 	}
 	
-	@Test
-	public void testSelectYear()
-	{
-		scene=stage.getScene();
-		
-		TextField field=(TextField)scene.lookup("#newYearTxtField");
-		assertTrue((field.isDisable()));
-		
-		//check first year is correct
-		selectYear(1);
-		clickOn("#tree");
-		typeDown(10);
-		field=(TextField)scene.lookup("#contentField");
-		assertTrue(field.getText().equals("Git abilities"));
-		
-		//and the second year
-		selectYear(1);
-		clickOn("#tree");
-		typeDown(10);
-		field=(TextField)scene.lookup("#contentField");
-		assertTrue(field.getText().equals("Passing sprint 2"));
-		
-		//and first again
-		selectYear(-1);
-		clickOn("#tree");
-		typeDown(10);
-		field=(TextField)scene.lookup("#contentField");
-		assertTrue(field.getText().equals("Git abilities"));
-		
-	}
+
 }

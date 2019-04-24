@@ -48,7 +48,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <Label minWidth="-Infinity" prefWidth="200.0" text="Year: " />
-                  <TextField fx:id="newYearTxtField" minWidth="-Infinity" prefWidth="200.0" />
+                  <TextField fx:id="newYearTxtField" editable="false" minWidth="-Infinity" prefWidth="200.0" />
                   <Button fx:id="enterNewYearButton" disable="true" mnemonicParsing="false" onMouseClicked="#newPlan" text="Submit New Year" />
                </children>
             </HBox>

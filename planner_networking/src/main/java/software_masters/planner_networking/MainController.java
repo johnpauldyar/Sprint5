@@ -124,10 +124,11 @@ public class MainController {
     {
 		boolean confirm = false;
 		TreeItem<Node> check= tree.getRoot();
-		if (!(check == null))
+		
+		confirm = ConfirmationBox.show("Do you want to save before you log out?", "Save", "Yes", "No");
+		if (confirm)
 		{
-			confirm = ConfirmationBox.show("Do you want to save before you log out?", "Save", "Yes", "No");
-			if (confirm)
+			if (!(check == null))
 			{
 				saveC(tree.getRoot().getValue(), yearDropdown.getValue().getYear());
 			}
