@@ -123,10 +123,11 @@ public class MainController {
     void logout(MouseEvent event) throws IOException
     {
 		boolean confirm = false;
-		confirm = ConfirmationBox.show("Do you want to save before you log out?", "Save", "Yes", "No");
-		if (confirm)
+		TreeItem<Node> check= tree.getRoot();
+		if (!(check == null))
 		{
-			if (!(tree.equals(null)))
+			confirm = ConfirmationBox.show("Do you want to save before you log out?", "Save", "Yes", "No");
+			if (confirm)
 			{
 				saveC(tree.getRoot().getValue(), yearDropdown.getValue().getYear());
 			}
@@ -161,6 +162,8 @@ public class MainController {
     @FXML
     void planChange(MouseEvent event) throws IllegalArgumentException, RemoteException 
     {
+    	editButton.setDisable(false);
+    	logout.setDisable(false);
 		tree.setRoot(makeTree(yearDropdown.getValue().getYear()).getRoot());
 
 		tree.getSelectionModel().selectedItemProperty()
@@ -202,6 +205,7 @@ public class MainController {
 			contentField.setText(str);
 			this.currNode = item;
 		}
+		
     }
     
     /**
