@@ -14,6 +14,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
@@ -119,6 +120,36 @@ public class MainGUITest extends ApplicationTest {
 		}
 	}
 	
+	public void editableButtons()
+	{
+		Button add=(Button)scene.lookup("#addChildButton");
+		Button remove=(Button)scene.lookup("#removeButton");
+		Button save=(Button)scene.lookup("#saveButton");
+		Button copy=(Button)scene.lookup("#copyButton");
+		Button submityear=(Button)scene.lookup("#enterNewYearButton");
+		Button edit=(Button)scene.lookup("#editButton");
+		assertTrue(!(add.isDisabled()));
+		assertTrue(!(remove.isDisabled()));
+		assertTrue(!(save.isDisabled()));
+		assertTrue(!(copy.isDisabled()));
+		assertTrue((submityear.isDisabled()));
+		assertTrue(!(edit.isDisabled()));
+	}
+	
+	public void viewButtons()
+	{
+		Button add=(Button)scene.lookup("#addChildButton");
+		Button remove=(Button)scene.lookup("#removeButton");
+		Button save=(Button)scene.lookup("#saveButton");
+		Button copy=(Button)scene.lookup("#copyButton");
+		Button submityear=(Button)scene.lookup("#enterNewYearButton");
+		assertTrue((add.isDisabled()));
+		assertTrue((remove.isDisabled()));
+		assertTrue((save.isDisabled()));
+		assertTrue((copy.isDisabled()));
+		assertTrue((submityear.isDisabled()));
+	}
+	
 	public void selectYear(int index)
 	{
 		clickOn("#yearDropdown");
@@ -127,5 +158,130 @@ public class MainGUITest extends ApplicationTest {
 		clickOn("#yearSelectButton");
 	}
 	
-
+//	@Test
+//	public void testSelectYear()
+//	{
+//		scene=stage.getScene();
+//		//some buttons should be unclickable
+//		TextField field=(TextField)scene.lookup("#newYearTxtField");
+//		assertTrue((field.isEditable()));
+//		viewButtons();
+//		
+//		//check first year is correct
+//		selectYear(1);
+//		clickOn("#tree");
+//		typeDown(10);
+//		field=(TextField)scene.lookup("#contentField");
+//		assertTrue(field.getText().equals("Git abilities"));
+//		
+//		//and the second year
+//		selectYear(1);
+//		clickOn("#tree");
+//		typeDown(10);
+//		field=(TextField)scene.lookup("#contentField");
+//		assertTrue(field.getText().equals("Passing sprint 2"));
+//		
+//		//and first again
+//		selectYear(-1);
+//		clickOn("#tree");
+//		typeDown(10);
+//		field=(TextField)scene.lookup("#contentField");
+//		assertTrue(field.getText().equals("Git abilities"));
+//	}
+	
+//	@Test
+//	public void testTextEdit()
+//	{
+//		scene=stage.getScene();
+//		selectYear(1);
+//		clickOn("#editButton");
+//		
+//		//check clicking edit disables the right buttons
+//		editableButtons();
+//		clickOn("#editButton");
+//		viewButtons();
+//		clickOn("#editButton");
+//		
+//		//when viewing a noneditable plan, clicking edit shouldn't do anything
+//		selectYear(3);
+//		clickOn("#editButton");
+//		Button button=(Button)scene.lookup("#editButton");
+//		assertTrue(button.getText().equals("Edit"));
+//		clickOn("#editButton");
+//		button=(Button)scene.lookup("#editButton");
+//		assertTrue(button.getText().equals("Edit"));
+//		
+//		selectYear(-2);
+//		clickOn("#editButton");
+//		clickOn("#tree");
+//		typeDown(1);
+//		clickOn("#contentField");
+//		clickOn("#contentField");
+//		clickOn("#contentField");
+//		write("first edit");
+//		clickOn("#tree");
+//		typeDown(-1);
+//		typeDown(1);
+//		TextField field=(TextField)scene.lookup("#contentField");
+//		assertTrue(field.getText().equals("first edit"));
+//	}
+//	
+//	@Test
+//	public void testAddBranches()
+//	{
+//		scene=stage.getScene();
+//		selectYear(2);
+//		clickOn("#editButton");
+//		clickOn("#tree");
+//		typeDown(1);
+//		clickOn("#addChildButton");
+//		clickOn("#tree");
+//		typeDown(20);
+//		TextField field=(TextField)scene.lookup("#contentField");
+//		assertTrue(field.getText().equals("Insert Content"));
+//		type(KeyCode.RIGHT);
+//		typeDown(1);
+//		field=(TextField)scene.lookup("#contentField");
+//		assertTrue(field.getText().equals("Insert Content"));
+//		clickOn("#contentField");
+//		clickOn("#contentField");
+//		clickOn("#contentField");
+//		write("first edit");
+//		clickOn("#setContentButton");
+//		clickOn("#tree");
+//		typeDown(20);
+//		typeDown(-1);
+//		field=(TextField)scene.lookup("#contentField");
+//		assertTrue(field.getText().equals("first edit"));
+//		typeDown(-7);
+//		field=(TextField)scene.lookup("#contentField");
+//		assertTrue(field.getText().equals("Our goal is to ensure that "
+//				+ "I get credit for this class."));
+//	}
+	
+//	@Test
+//	public void testRemoveBranch()
+//	{
+//		scene=stage.getScene();
+//		selectYear(3);
+//		clickOn("#editButton");
+//		
+//		clickOn("#tree");
+//		typeDown(4);
+//		clickOn("#removeButton");
+//		clickOn("#tree");
+//		typeDown(1);
+//		typeDown(-1);
+//		TextField field=(TextField)scene.lookup("#contentField");
+//		assertTrue(field.getText().equals("Result 2018"));
+//		typeDown(-2);
+//		clickOn("#addChildButton");
+//		clickOn("#tree");
+//		typeDown(3);
+//		clickOn("#removeButton");
+//		clickOn("#tree");
+//		field=(TextField)scene.lookup("#contentField");
+//		System.out.println(field.getText());
+//		assertTrue(field.getText().equals("Result 2018"));
+//	}
 }
