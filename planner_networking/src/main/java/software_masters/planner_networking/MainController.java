@@ -66,6 +66,8 @@ public class MainController {
     
     public void setClient(Client client)
     {
+    	
+    	
     	this.client=client;
     }
 
@@ -80,6 +82,8 @@ public class MainController {
     {
 		newYearTxtField.setText("");
 		newYearTxtField.setEditable(true);
+		removeButton.setDisable(true);
+		addChildButton.setDisable(true);
 		enterNewYearButton.setDisable(false);
 		copyButton.setDisable(true);
 		String year = yearDropdown.getValue().getYear();
@@ -103,8 +107,6 @@ public class MainController {
 		{
 			editButton.setText("View");
 			contentField.setEditable(true);
-			addChildButton.setDisable(false);
-			removeButton.setDisable(false);
 			saveButton.setDisable(false);
 			copyButton.setDisable(false);
 		} else if (editButton.getText() == "View")
@@ -154,7 +156,13 @@ public class MainController {
 			saveButton.setDisable(false);
 			yearDropdown.getItems().clear();
 			getPlans(yearDropdown);
-		} else
+			tree.setRoot(null);
+			addChildButton.setDisable(true);
+			removeButton.setDisable(true);
+			editButton.setDisable(true);
+			saveButton.setDisable(true);
+		} 
+		else
 		{
 			System.out.println("Please enter a valid year please");
 		}
@@ -209,6 +217,8 @@ public class MainController {
 			String str = item.getValue().getData();
 			contentField.setText(str);
 			this.currNode = item;
+			addChildButton.setDisable(false);
+			removeButton.setDisable(false);
 		}
 		listener = (observable,oldvalue,newvalue) -> setText(newvalue);
 		contentField.textProperty().addListener(listener);
@@ -338,11 +348,11 @@ public class MainController {
 				Node tree1 = new Node(copy, master.getChildren().get(i).getName(),
 						master.getChildren().get(i).getData(), null);
 				copy.getChildren().add(tree1);
-				master = master.getChildren().get(i);
-				deepCopier(master, tree1);
+				deepCopier(master.getChildren().get(i), tree1);
 			}
 		}
 
 	}
 
 }
+
