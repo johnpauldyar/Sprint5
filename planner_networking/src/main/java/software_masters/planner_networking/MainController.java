@@ -217,8 +217,11 @@ public class MainController {
 			String str = item.getValue().getData();
 			contentField.setText(str);
 			this.currNode = item;
-			addChildButton.setDisable(false);
-			removeButton.setDisable(false);
+			if (editButton.getText().contentEquals("View"))
+			{
+				addChildButton.setDisable(false);
+				removeButton.setDisable(false);
+			}
 		}
 		listener = (observable,oldvalue,newvalue) -> setText(newvalue);
 		contentField.textProperty().addListener(listener);
