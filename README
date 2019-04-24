@@ -1,5 +1,5 @@
 GUI Testing:
-Run GUIMainTest.java, LoginTest.java
+Run ServerImplementation.java then GUIMainTest.java, LoginTest.java
 
 GUI implementation authors:
 https://docs.google.com/document/d/1JGaaPfpaPN0RE5hOiXL-lZ0hIkXgPw4YOGTwIwnPAcY/edit?usp=sharing
