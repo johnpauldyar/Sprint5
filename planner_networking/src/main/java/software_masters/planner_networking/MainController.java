@@ -41,8 +41,6 @@ public class MainController {
     @FXML
     private TextField contentField;
 
-    @FXML
-    private Button setContentButton;
 
     @FXML
     private TextField newYearTxtField;
@@ -83,6 +81,7 @@ public class MainController {
 		newYearTxtField.setText("");
 		newYearTxtField.setEditable(true);
 		enterNewYearButton.setDisable(false);
+		copyButton.setDisable(true);
 		String year = yearDropdown.getValue().getYear();
 		yearSelectButton.setDisable(true);
 		yearDropdown.setDisable(true);
@@ -107,7 +106,6 @@ public class MainController {
 			addChildButton.setDisable(false);
 			removeButton.setDisable(false);
 			saveButton.setDisable(false);
-			setContentButton.setDisable(false);
 			copyButton.setDisable(false);
 		} else if (editButton.getText() == "View")
 		{
@@ -116,7 +114,6 @@ public class MainController {
 			addChildButton.setDisable(true);
 			removeButton.setDisable(true);
 			saveButton.setDisable(true);
-			setContentButton.setDisable(true);
 			copyButton.setDisable(true);
 		}
 
@@ -140,12 +137,11 @@ public class MainController {
     }
 
     @FXML
-    void newPlan(MouseEvent event) throws IllegalArgumentException, RemoteException 
+    void newPlan(MouseEvent event) throws Exception 
     {
 		String year = newYearTxtField.getText();
 		if (year.length() >= 1)
 		{
-			currNode.getValue().setData(contentField.getText());
 			saveC(tree.getRoot().getValue(), year);
 			yearSelectButton.setDisable(false);
 			yearDropdown.setDisable(false);
@@ -156,6 +152,8 @@ public class MainController {
 			newYearTxtField.setEditable(false);
 			enterNewYearButton.setDisable(true);
 			saveButton.setDisable(false);
+			yearDropdown.getItems().clear();
+			getPlans(yearDropdown);
 		} else
 		{
 			System.out.println("Please enter a valid year please");
