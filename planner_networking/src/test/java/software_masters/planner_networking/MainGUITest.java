@@ -1,24 +1,9 @@
 package software_masters.planner_networking;
 
 import static org.junit.Assert.assertTrue;
-//import static org.testfx.assertions.api.Assertions.assertThat;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
-import java.io.IOException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -28,77 +13,73 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-public class MainGUITest extends ApplicationTest {
-	
-	private Registry registry;
-	private Client client;
-	private LoginController controller;
-	private MainController mainController;
+public class MainGUITest extends ApplicationTest
+{
+
 	private Stage stage;
 	private Scene scene;
-	
+
 	@BeforeClass
 	public static void setUpClass() throws Exception
 	{
 		ServerImplementation.main(null);
 		ApplicationTest.launch(Driver.class);
 	}
-	
+
 	@Override
 	public void start(Stage stage) throws Exception
 	{
-		this.stage=stage;
+		this.stage = stage;
 		stage.show();
 	}
-	
+
 	@Before
 	public void login()
 	{
-		scene=stage.getScene();
+		scene = stage.getScene();
 		clickOn("#userText");
 		write("user");
 		clickOn("#passText");
 		write("user");
 		clickOn("#loginButton");
 	}
-	
+
 	@After
 	public void logout()
 	{
 		clickOn("#logout");
-		scene=stage.getScene();
+		scene = stage.getScene();
 		clickOn("#no");
-		scene=stage.getScene();
+		scene = stage.getScene();
 	}
-	
+
 	public void typeDown(int x)
-	{ 
-		if(x>0)
+	{
+		if (x > 0)
 		{
-			for(int i=0; i<x;i++)
+			for (int i = 0; i < x; i++)
 			{
 				type(KeyCode.DOWN);
 			}
-		}
-		else
+		} else
 		{
-			for(int i=0; i>x;i--)
+			for (int i = 0; i > x; i--)
 			{
 				type(KeyCode.UP);
 			}
 		}
 	}
-	
+
 	public void editableButtons()
 	{
 		clickOn("#tree");
 		type(KeyCode.DOWN);
-		Button add=(Button)scene.lookup("#addChildButton");
-		Button remove=(Button)scene.lookup("#removeButton");
-		Button save=(Button)scene.lookup("#saveButton");
-		Button copy=(Button)scene.lookup("#copyButton");
-		Button submityear=(Button)scene.lookup("#enterNewYearButton");
-		Button edit=(Button)scene.lookup("#editButton");
+		Button add = (Button) scene.lookup("#addChildButton");
+		Button remove = (Button) scene.lookup("#removeButton");
+		Button save = (Button) scene.lookup("#saveButton");
+		Button copy = (Button) scene.lookup("#copyButton");
+		Button submityear = (Button) scene.lookup("#enterNewYearButton");
+		Button edit = (Button) scene.lookup("#editButton");
 		assertTrue(!(add.isDisabled()));
 		assertTrue(!(remove.isDisabled()));
 		assertTrue(!(save.isDisabled()));
@@ -108,21 +89,21 @@ public class MainGUITest extends ApplicationTest {
 		clickOn("#tree");
 		type(KeyCode.UP);
 	}
-	
+
 	public void viewButtons()
 	{
-		Button add=(Button)scene.lookup("#addChildButton");
-		Button remove=(Button)scene.lookup("#removeButton");
-		Button save=(Button)scene.lookup("#saveButton");
-		Button copy=(Button)scene.lookup("#copyButton");
-		Button submityear=(Button)scene.lookup("#enterNewYearButton");
+		Button add = (Button) scene.lookup("#addChildButton");
+		Button remove = (Button) scene.lookup("#removeButton");
+		Button save = (Button) scene.lookup("#saveButton");
+		Button copy = (Button) scene.lookup("#copyButton");
+		Button submityear = (Button) scene.lookup("#enterNewYearButton");
 		assertTrue((add.isDisabled()));
 		assertTrue((remove.isDisabled()));
 		assertTrue((save.isDisabled()));
 		assertTrue((copy.isDisabled()));
 		assertTrue((submityear.isDisabled()));
 	}
-	
+
 	public void selectYear(int index)
 	{
 		clickOn("#yearDropdown");
@@ -130,60 +111,60 @@ public class MainGUITest extends ApplicationTest {
 		type(KeyCode.ENTER);
 		clickOn("#yearSelectButton");
 	}
-	
+
 	@Test
 	public void testSelectYear()
 	{
-		scene=stage.getScene();
-		//some buttons should be unclickable
-		TextField field=(TextField)scene.lookup("#newYearTxtField");
+		scene = stage.getScene();
+		// some buttons should be unclickable
+		TextField field = (TextField) scene.lookup("#newYearTxtField");
 		assertTrue(!(field.isEditable()));
 		viewButtons();
-		
-		//check first year is correct
+
+		// check first year is correct
 		selectYear(1);
 		clickOn("#tree");
 		typeDown(10);
-		field=(TextField)scene.lookup("#contentField");
+		field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("Git abilities"));
-		
-		//and the second year
+
+		// and the second year
 		selectYear(1);
 		clickOn("#tree");
 		typeDown(10);
-		field=(TextField)scene.lookup("#contentField");
+		field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("Passing sprint 2"));
-		
-		//and first again
+
+		// and first again
 		selectYear(-1);
 		clickOn("#tree");
 		typeDown(10);
-		field=(TextField)scene.lookup("#contentField");
+		field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("Git abilities"));
 	}
-	
+
 	@Test
 	public void testTextEdit()
 	{
-		scene=stage.getScene();
+		scene = stage.getScene();
 		selectYear(1);
 		clickOn("#editButton");
-		
-		//check clicking edit disables the right buttons
+
+		// check clicking edit disables the right buttons
 		editableButtons();
 		clickOn("#editButton");
 		viewButtons();
 		clickOn("#editButton");
-		
-		//when viewing a noneditable plan, clicking edit shouldn't do anything
+
+		// when viewing a noneditable plan, clicking edit shouldn't do anything
 		selectYear(3);
 		clickOn("#editButton");
-		Button button=(Button)scene.lookup("#editButton");
+		Button button = (Button) scene.lookup("#editButton");
 		assertTrue(button.getText().equals("Edit"));
 		clickOn("#editButton");
-		button=(Button)scene.lookup("#editButton");
+		button = (Button) scene.lookup("#editButton");
 		assertTrue(button.getText().equals("Edit"));
-		
+
 		selectYear(-2);
 		clickOn("#editButton");
 		clickOn("#tree");
@@ -195,14 +176,14 @@ public class MainGUITest extends ApplicationTest {
 		clickOn("#tree");
 		typeDown(-1);
 		typeDown(1);
-		TextField field=(TextField)scene.lookup("#contentField");
+		TextField field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("first edit"));
 	}
-	
+
 	@Test
 	public void testAddBranches()
 	{
-		scene=stage.getScene();
+		scene = stage.getScene();
 		selectYear(2);
 		clickOn("#editButton");
 		clickOn("#tree");
@@ -210,11 +191,11 @@ public class MainGUITest extends ApplicationTest {
 		clickOn("#addChildButton");
 		clickOn("#tree");
 		typeDown(20);
-		TextField field=(TextField)scene.lookup("#contentField");
+		TextField field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("Insert Content"));
 		type(KeyCode.RIGHT);
 		typeDown(1);
-		field=(TextField)scene.lookup("#contentField");
+		field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("Insert Content"));
 		clickOn("#contentField");
 		clickOn("#contentField");
@@ -223,28 +204,27 @@ public class MainGUITest extends ApplicationTest {
 		clickOn("#tree");
 		typeDown(20);
 		typeDown(-1);
-		field=(TextField)scene.lookup("#contentField");
+		field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("first edit"));
 		typeDown(-7);
-		field=(TextField)scene.lookup("#contentField");
-		assertTrue(field.getText().equals("Our goal is to ensure that "
-				+ "I get credit for this class."));
+		field = (TextField) scene.lookup("#contentField");
+		assertTrue(field.getText().equals("Our goal is to ensure that " + "I get credit for this class."));
 	}
-	
+
 	@Test
 	public void testRemoveBranch()
 	{
-		scene=stage.getScene();
+		scene = stage.getScene();
 		selectYear(3);
 		clickOn("#editButton");
-		
+
 		clickOn("#tree");
 		typeDown(4);
 		clickOn("#removeButton");
 		clickOn("#tree");
 		typeDown(-1);
 		typeDown(1);
-		TextField field=(TextField)scene.lookup("#contentField");
+		TextField field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("Result 2018"));
 		typeDown(-2);
 		clickOn("#addChildButton");
@@ -253,15 +233,15 @@ public class MainGUITest extends ApplicationTest {
 		clickOn("#removeButton");
 		clickOn("#tree");
 		typeDown(20);
-		field=(TextField)scene.lookup("#contentField");
+		field = (TextField) scene.lookup("#contentField");
 		System.out.println(field.getText());
 		assertTrue(field.getText().equals("Result 2018"));
 	}
-	
+
 	@Test
 	public void testCopy()
 	{
-		scene=stage.getScene();
+		scene = stage.getScene();
 		selectYear(2);
 		clickOn("#editButton");
 		clickOn("#copyButton");
@@ -272,7 +252,7 @@ public class MainGUITest extends ApplicationTest {
 		clickOn("#editButton");
 		clickOn("#tree");
 		typeDown(20);
-		TextField field=(TextField)scene.lookup("#contentField");
+		TextField field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("Passing sprint 2"));
 		clickOn("#contentField");
 		clickOn("#contentField");
@@ -281,8 +261,8 @@ public class MainGUITest extends ApplicationTest {
 		selectYear(-6);
 		clickOn("#tree");
 		typeDown(20);
-		field=(TextField)scene.lookup("#contentField");
+		field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("Passing sprint 2"));
-		
+
 	}
 }

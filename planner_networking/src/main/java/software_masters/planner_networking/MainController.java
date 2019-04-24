@@ -12,74 +12,73 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 
-public class MainController {
+public class MainController
+{
 
-    @FXML
-    ChoiceBox<PlanFile> yearDropdown;
+	@FXML
+	ChoiceBox<PlanFile> yearDropdown;
 
-    @FXML
-    private Button yearSelectButton;
+	@FXML
+	private Button yearSelectButton;
 
-    @FXML
-    private Button addChildButton;
+	@FXML
+	private Button addChildButton;
 
-    @FXML
-    private Button removeButton;
+	@FXML
+	private Button removeButton;
 
-    @FXML
-    private Button editButton;
+	@FXML
+	private Button editButton;
 
-    @FXML
-    private Button saveButton;
+	@FXML
+	private Button saveButton;
 
-    @FXML
-    private Button copyButton;
+	@FXML
+	private Button copyButton;
 
-    @FXML
-    private Button logout;
+	@FXML
+	private Button logout;
 
-    @FXML
-    private TextField contentField;
+	@FXML
+	private TextField contentField;
 
+	@FXML
+	private TextField newYearTxtField;
 
-    @FXML
-    private TextField newYearTxtField;
+	@FXML
+	private Button enterNewYearButton;
 
-    @FXML
-    private Button enterNewYearButton;
+	@FXML
+	private TreeView<Node> tree;
 
-    @FXML
-    private TreeView<Node> tree;
-    
-    private Client client;
-    
-    private TreeItem<Node> currNode;
-    
-    ViewTransitionalModel vtmodel;
-    
-    ChangeListener<String> listener;
-    
-    public void setViewTransitionalModel(ViewTransitionalModel model)
-    {
-    	this.vtmodel=model;
-    }
-    
-    public void setClient(Client client)
-    {
-    	
-    	
-    	this.client=client;
-    }
+	private Client client;
 
-    @FXML
-    void addBranch(MouseEvent event) throws Exception 
-    {
-    	addBranch(currNode, yearDropdown.getValue().getYear());
-    }
+	private TreeItem<Node> currNode;
 
-    @FXML
-    void copy(MouseEvent event) throws IllegalArgumentException, RemoteException 
-    {
+	ViewTransitionalModel vtmodel;
+
+	ChangeListener<String> listener;
+
+	public void setViewTransitionalModel(ViewTransitionalModel model)
+	{
+		this.vtmodel = model;
+	}
+
+	public void setClient(Client client)
+	{
+
+		this.client = client;
+	}
+
+	@FXML
+	void addBranch(MouseEvent event) throws Exception
+	{
+		addBranch(currNode, yearDropdown.getValue().getYear());
+	}
+
+	@FXML
+	void copy(MouseEvent event) throws IllegalArgumentException, RemoteException
+	{
 		newYearTxtField.setText("");
 		newYearTxtField.setEditable(true);
 		removeButton.setDisable(true);
@@ -95,11 +94,11 @@ public class MainController {
 		editButton.setText("View");
 		editButton.setDisable(true);
 		saveButton.setDisable(true);
-    }
+	}
 
-    @FXML
-    void edit(MouseEvent event) throws IllegalArgumentException, RemoteException 
-    {
+	@FXML
+	void edit(MouseEvent event) throws IllegalArgumentException, RemoteException
+	{
 		client.getPlan(yearDropdown.getValue().getYear());
 		Boolean bool = client.getCurrPlanFile().isCanEdit();
 
@@ -119,14 +118,14 @@ public class MainController {
 			copyButton.setDisable(true);
 		}
 
-    }
+	}
 
-    @FXML
-    void logout(MouseEvent event) throws IOException
-    {
+	@FXML
+	void logout(MouseEvent event) throws IOException
+	{
 		boolean confirm = false;
-		TreeItem<Node> check= tree.getRoot();
-		
+		TreeItem<Node> check = tree.getRoot();
+
 		confirm = ConfirmationBox.show("Do you want to save before you log out?", "Save", "Yes", "No");
 		if (confirm)
 		{
@@ -135,12 +134,12 @@ public class MainController {
 				saveC(tree.getRoot().getValue(), yearDropdown.getValue().getYear());
 			}
 		}
-    	vtmodel.showLogin();
-    }
+		vtmodel.showLogin();
+	}
 
-    @FXML
-    void newPlan(MouseEvent event) throws Exception 
-    {
+	@FXML
+	void newPlan(MouseEvent event) throws Exception
+	{
 		String year = newYearTxtField.getText();
 		if (year.length() >= 1)
 		{
@@ -161,19 +160,18 @@ public class MainController {
 			removeButton.setDisable(true);
 			editButton.setDisable(true);
 			saveButton.setDisable(true);
-		} 
-		else
+		} else
 		{
 			System.out.println("Please enter a valid year please");
 		}
 
-    }
+	}
 
-    @FXML
-    void planChange(MouseEvent event) throws IllegalArgumentException, RemoteException 
-    {
-    	editButton.setDisable(false);
-    	logout.setDisable(false);
+	@FXML
+	void planChange(MouseEvent event) throws IllegalArgumentException, RemoteException
+	{
+		editButton.setDisable(false);
+		logout.setDisable(false);
 		tree.setRoot(makeTree(yearDropdown.getValue().getYear()).getRoot());
 
 		tree.getSelectionModel().selectedItemProperty()
@@ -181,36 +179,36 @@ public class MainController {
 		editButton.setText("View");
 		edit(event);
 
-    }
+	}
 
-    @FXML
-    void remove(MouseEvent event)
-    {
+	@FXML
+	void remove(MouseEvent event)
+	{
 		if (currNode.getParent().getChildren().size() > 1)
 		{
 			client.setCurrNode(currNode.getValue());
 			client.getCurrNode().getParent().removeChild(client.getCurrNode());
 			currNode.getParent().getChildren().remove(currNode);
 		}
-    }
+	}
 
-    @FXML
-    void save(MouseEvent event) throws RemoteException 
-    {
+	@FXML
+	void save(MouseEvent event) throws RemoteException
+	{
 		saveC(tree.getRoot().getValue(), yearDropdown.getValue().getYear());
-    }
+	}
 
-    void setText(String newvalue) 
-    {
+	void setText(String newvalue)
+	{
 		currNode.getValue().setData(newvalue);
-    }
+	}
 
-    void tree_SelectionChanged(TreeItem<Node> item)
-    {
-    	if (listener != null)
-    	{
-    		contentField.textProperty().removeListener(listener);
-    	}
+	void tree_SelectionChanged(TreeItem<Node> item)
+	{
+		if (listener != null)
+		{
+			contentField.textProperty().removeListener(listener);
+		}
 
 		if (item != null)
 		{
@@ -223,14 +221,12 @@ public class MainController {
 				removeButton.setDisable(false);
 			}
 		}
-		listener = (observable,oldvalue,newvalue) -> setText(newvalue);
+		listener = (observable, oldvalue, newvalue) -> setText(newvalue);
 		contentField.textProperty().addListener(listener);
-		
 
-		
-    }
-    
-    /**
+	}
+
+	/**
 	 * Gets the plans of the department for display in a choiceBox
 	 * 
 	 * @param ChoiceBox<PlanFile> plans
@@ -358,4 +354,3 @@ public class MainController {
 	}
 
 }
-

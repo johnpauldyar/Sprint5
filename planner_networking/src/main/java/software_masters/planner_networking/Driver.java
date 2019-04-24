@@ -56,11 +56,7 @@ public class Driver extends Application implements ViewTransitionalModel
 			e.printStackTrace();
 
 		}
-		
 
-		
-		
-		
 		stage = primaryStage;
 		showLogin();
 		primaryStage.setTitle("Centre Business Plans");
@@ -77,8 +73,6 @@ public class Driver extends Application implements ViewTransitionalModel
 					e1.printStackTrace();
 				}
 			});
-		
-
 
 	}
 
@@ -90,36 +84,36 @@ public class Driver extends Application implements ViewTransitionalModel
 	public void closing() throws RemoteException
 	{
 		boolean confirm = false;
-		confirm = ConfirmationBox.show("Are you sure you want to quit? \n"
-				+ "Unsaved data will not be saved ", "Confirmation", "Yes", "No");
+		confirm = ConfirmationBox.show("Are you sure you want to quit? \n" + "Unsaved data will not be saved ",
+				"Confirmation", "Yes", "No");
 		if (confirm)
 		{
 			client.getServer().save();
 			stage.close();
 		}
 	}
-	
+
 	public void showLogin() throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../login.fxml"));
-		
+
 		Parent root = (Parent) loader.load();
 		Scene scene = new Scene(root);
-		
+
 		controller = loader.getController();
 		controller.setClient(client);
 		controller.setViewTransitionalModel(this);
 		stage.setScene(scene);
-		
+
 	}
-	
+
 	public void showMainView() throws Exception
 	{
 		FXMLLoader loader2 = new FXMLLoader(getClass().getResource("ClientViewScene.fxml"));
-		
+
 		Parent root2 = (Parent) loader2.load();
 		Scene scene2 = new Scene(root2);
-		
+
 		mainController = loader2.getController();
 		mainController.setClient(client);
 		mainController.setViewTransitionalModel(this);
