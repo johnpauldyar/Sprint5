@@ -28,6 +28,7 @@
             <Button fx:id="saveButton" disable="true" mnemonicParsing="false" onMouseClicked="#save" text="Save" />
             <Button fx:id="copyButton" disable="true" mnemonicParsing="false" onMouseClicked="#copy" text="Use as Template" />
             <Button fx:id="logout" mnemonicParsing="false" onMouseClicked="#logout" text="Logout" />
+            <Button fx:id="compare" mnemonicParsing="false" onAction="#compare" text="Compare Mode" />
          </children>
       </VBox>
    </right>
@@ -36,10 +37,24 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Region prefHeight="200.0" prefWidth="200.0" />
                   <Label text="Fill in the Content Below" />
                   <TextField fx:id="contentField" minHeight="-Infinity" prefHeight="90.0" prefWidth="300.0" />
+                  <Region prefHeight="66.0" prefWidth="550.0" />
+                  <Label text="Comments:" />
+                  <HBox prefHeight="24.0" prefWidth="550.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="294.0" text="DrBradshaw: Thank you John Paul, very cool!" />
+                        <Button mnemonicParsing="false" text="Remove" />
+                     </children>
+                  </HBox>
                   <Region prefHeight="200.0" prefWidth="200.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="25.0" prefWidth="92.0" text="JohnPaulDyar:" />
+                        <TextField />
+                        <Button mnemonicParsing="false" text="Submit Comment" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </center>

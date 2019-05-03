@@ -22,6 +22,7 @@ public class Driver extends Application implements ViewTransitionalModel
 	private Client client;
 	private LoginController controller;
 	private MainController mainController;
+	private CompareController compCont;
 	private Stage stage;
 
 	/**
@@ -120,5 +121,19 @@ public class Driver extends Application implements ViewTransitionalModel
 		mainController.getPlans(mainController.yearDropdown);
 		stage.setScene(scene2);
 	}
+	
+	public void showCompare() throws Exception
+	{
+		FXMLLoader loader3 = new FXMLLoader(getClass().getResource("CompareMode.fxml"));
 
+		Parent root3 = (Parent) loader3.load();
+		Scene scene3 = new Scene(root3);
+
+		compCont = loader3.getController();
+		compCont.setClient(client);
+		compCont.setViewTransitionalModel(this);
+		compCont.getPlans(compCont.drop1);
+		compCont.getPlans(compCont.drop2);
+		stage.setScene(scene3);
+	}
 }

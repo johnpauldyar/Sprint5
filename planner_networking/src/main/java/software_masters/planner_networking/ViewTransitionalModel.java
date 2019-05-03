@@ -9,4 +9,6 @@ public interface ViewTransitionalModel
 
 	public void showLogin() throws IOException;
 
+	public void showCompare() throws IOException, Exception;
+
 }

@@ -7,6 +7,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -50,10 +51,16 @@ public class MainController
 
 	@FXML
 	private TreeView<Node> tree;
+	
+    @FXML
+    private TextArea comments;
 
 	private Client client;
 
 	private TreeItem<Node> currNode;
+	
+	@FXML
+	private Button compare;
 
 	ViewTransitionalModel vtmodel;
 
@@ -191,6 +198,12 @@ public class MainController
 			currNode.getParent().getChildren().remove(currNode);
 		}
 	}
+	
+	@FXML
+	void compare(MouseEvent event) throws IOException, Exception
+	{
+		vtmodel.showCompare();
+	}
 
 	@FXML
 	void save(MouseEvent event) throws RemoteException
@@ -209,7 +222,7 @@ public class MainController
 		{
 			contentField.textProperty().removeListener(listener);
 		}
-
+		ChangeListener<String> listener;
 		if (item != null)
 		{
 			String str = item.getValue().getData();
@@ -352,5 +365,7 @@ public class MainController
 		}
 
 	}
+	
+
 
 }
