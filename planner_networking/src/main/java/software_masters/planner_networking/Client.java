@@ -159,7 +159,7 @@ public class Client
 
 		for (int i = index; i < names.size(); i++)
 		{
-			Node temp1 = new Node(temp, names.get(i), "Insert Content", null);
+			Node temp1 = new Node(temp, names.get(i), "Insert Content", null,null);
 			temp.getChildren().add(temp1);
 			temp = temp1;
 		}

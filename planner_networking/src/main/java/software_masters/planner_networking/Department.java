@@ -3,6 +3,7 @@
  */
 package software_masters.planner_networking;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,13 +13,18 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author wesley murray
  */
 
-public class Department
+public class Department implements Serializable 
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2291616780795200489L;
 	/**
 	 * Object which stores the planFiles of a particular department based on year
 	 */
 	private ConcurrentHashMap<String, PlanFile> planFileMap;
+	
 
 	public Department()
 	{

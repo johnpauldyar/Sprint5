@@ -8,48 +8,47 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="software_masters.planner_networking.CompareController">
+<BorderPane fx:id="compareBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="software_masters.planner_networking.CompareController">
    <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="373.0" prefWidth="220.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="23.0" prefWidth="100.0">
                <children>
-                  <ChoiceBox fx:id="drop1" prefWidth="150.0" />
-                  <Button fx:id="select1" mnemonicParsing="false" onAction="#planChange1" text="Select" />
+                  <ChoiceBox fx:id="drop1" prefHeight="26.0" prefWidth="231.0" />
+                  <Button fx:id="select1" mnemonicParsing="false" onMouseClicked="#planChange1" prefHeight="26.0" prefWidth="140.0" text="Select" />
                </children>
             </HBox>
-            <TreeView fx:id="tree1" prefHeight="200.0" prefWidth="100.0" />
-            <Label fx:id="label1" prefWidth="100.0" text="The Goal is to pass this class" wrapText="true" />
+            <TreeView fx:id="tree1" prefHeight="378.0" prefWidth="220.0" />
+            <Label fx:id="label1" wrapText="true" />
          </children>
       </VBox>
    </left>
    <right>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="373.0" prefWidth="221.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="15.0" prefWidth="100.0">
                <children>
                   <ChoiceBox fx:id="drop2" prefWidth="150.0" />
-                  <Button fx:id="select2" mnemonicParsing="false" onAction="#planChange2" text="Select" />
+                  <Button fx:id="select2" mnemonicParsing="false" onMouseClicked="#planChange2" text="Select" />
                </children>
             </HBox>
-            <TreeView fx:id="tree2" prefHeight="200.0" prefWidth="200.0" />
-            <Label fx:id="label2" text="The Goal is to learn something in this class" wrapText="true" />
+            <TreeView fx:id="tree2" prefHeight="379.0" prefWidth="221.0" />
+            <Label fx:id="label2" wrapText="true" />
          </children>
       </VBox>
    </right>
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="diffLabel" alignment="CENTER" text="Goal 1 differs" />
-            <Label text="Assessment Process 1 differs" />
+            <Label fx:id="diffLabel" alignment="CENTER" text=" " wrapText="true" />
          </children>
       </VBox>
    </center>
    <top>
       <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="view" contentDisplay="CENTER" mnemonicParsing="false" text="View Mode" />
-            <Button fx:id="logout" mnemonicParsing="false" text="Log out" />
+            <Button fx:id="view" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#view" text="View Mode" />
+            <Button fx:id="logout" mnemonicParsing="false" onMouseClicked="#logout" text="Log out" />
          </children>
       </HBox>
    </top>

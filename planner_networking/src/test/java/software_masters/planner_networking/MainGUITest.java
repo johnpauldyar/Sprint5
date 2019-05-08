@@ -5,9 +5,12 @@ import static org.junit.Assert.assertTrue;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,6 +28,7 @@ public class MainGUITest extends ApplicationTest
 		//ServerImplementation.main(null);
 		ApplicationTest.launch(Driver.class);
 	}
+	
 
 	@Override
 	public void start(Stage stage) throws Exception
@@ -118,29 +122,29 @@ public class MainGUITest extends ApplicationTest
 		scene = stage.getScene();
 		// some buttons should be unclickable
 		TextField field = (TextField) scene.lookup("#newYearTxtField");
-		assertTrue(!(field.isEditable()));
+		assertTrue(!(field.isEditable())); 
 		viewButtons();
 
 		// check first year is correct
 		selectYear(1);
 		clickOn("#tree");
-		typeDown(10);
+		typeDown(20);
 		field = (TextField) scene.lookup("#contentField");
-		assertTrue(field.getText().equals("Git abilities"));
+		assertTrue(field.getText().equals("Result 4"));
 
 		// and the second year
 		selectYear(1);
 		clickOn("#tree");
-		typeDown(10);
+		typeDown(20);
 		field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("Passing sprint 2"));
 
 		// and first again
 		selectYear(-1);
 		clickOn("#tree");
-		typeDown(10);
+		typeDown(20);
 		field = (TextField) scene.lookup("#contentField");
-		assertTrue(field.getText().equals("Git abilities"));
+		assertTrue(field.getText().equals("Result 4"));
 	}
 
 	@Test
@@ -234,7 +238,6 @@ public class MainGUITest extends ApplicationTest
 		clickOn("#tree");
 		typeDown(20);
 		field = (TextField) scene.lookup("#contentField");
-		System.out.println(field.getText());
 		assertTrue(field.getText().equals("Result 2018"));
 	}
 
@@ -264,5 +267,37 @@ public class MainGUITest extends ApplicationTest
 		field = (TextField) scene.lookup("#contentField");
 		assertTrue(field.getText().equals("Passing sprint 2"));
 
+	}
+	
+	@Test
+	public void testAddAndRemoveComment()
+	{
+		scene = stage.getScene();
+		Label lbl = (Label) scene.lookup("#userId");
+		assertTrue(lbl.getText().equals("user:"));
+		
+		selectYear(2);
+		clickOn("#tree");
+		typeDown(1);
+		typeDown(-10);
+		
+		clickOn("#comment");
+		write("This is a test");
+		clickOn("#commentSubmit");
+		
+		VBox vbox = (VBox) scene.lookup("#commentVBox");
+		int sizeOfVBox=vbox.getChildren().size();
+		HBox hbox = (HBox) vbox.getChildren().get(sizeOfVBox-1);
+		lbl = (Label) hbox.getChildren().get(0);
+		hbox.getChildren().get(1).setId("Remove");
+		assertTrue(lbl.getText().equals("user: This is a test"));
+		
+		clickOn("#Remove");
+		vbox = (VBox) scene.lookup("#commentVBox");
+		assertTrue(sizeOfVBox -1 == vbox.getChildren().size());
+		
+		
+		
+		
 	}
 }

@@ -16,6 +16,7 @@ public class Node implements Serializable
 	private String name;
 	private String data;
 	private ArrayList<Node> children = new ArrayList<Node>();
+	private ArrayList<String> comments = new ArrayList<String>();
 
 	// constructor is data is not known
 	/**
@@ -27,21 +28,24 @@ public class Node implements Serializable
 	 * @param data   data for node
 	 * @param child  list of children
 	 */
-	public Node(Node parent, String name, String data, ArrayList<Node> child) throws RemoteException
+	public Node(Node parent, String name, String data, ArrayList<Node> child, ArrayList<String> comments) throws RemoteException
 	{
 		this.name = name;
 		this.parent = parent;
 		this.data = data;
+		
 
 	}
 
 	// empty constructor for XML
 	public Node() throws RemoteException
 	{
-		this(null, "blank", "empty", null);
+		this(null, "blank", "empty", null, null);
 	}
 
 	// Getter and setters
+	
+	
 	/**
 	 * returns a String name of node
 	 * 
@@ -50,6 +54,16 @@ public class Node implements Serializable
 	public String getName()
 	{
 		return name;
+	}
+
+	public ArrayList<String> getComments() 
+	{
+		return comments;
+	}
+
+	public void setComments(ArrayList<String> comments)
+	{
+		this.comments = comments;
 	}
 
 	public String toString()

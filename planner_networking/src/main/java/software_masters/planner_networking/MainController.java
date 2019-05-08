@@ -2,16 +2,20 @@ package software_masters.planner_networking;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class MainController
 {
@@ -51,9 +55,18 @@ public class MainController
 
 	@FXML
 	private TreeView<Node> tree;
-	
+    
     @FXML
-    private TextArea comments;
+    Label userId;
+    
+    @FXML
+    private TextField comment;
+    
+    @FXML
+    private Button commentSubmit;
+    
+    @FXML
+    private VBox commentVBox;
 
 	private Client client;
 
@@ -65,6 +78,8 @@ public class MainController
 	ViewTransitionalModel vtmodel;
 
 	ChangeListener<String> listener;
+	
+	String user;
 
 	public void setViewTransitionalModel(ViewTransitionalModel model)
 	{
@@ -115,6 +130,11 @@ public class MainController
 			contentField.setEditable(true);
 			saveButton.setDisable(false);
 			copyButton.setDisable(false);
+			if (currNode != null )
+			{
+				addChildButton.setDisable(false);
+				removeButton.setDisable(false);
+			}
 		} else if (editButton.getText() == "View")
 		{
 			editButton.setText("Edit");
@@ -178,7 +198,10 @@ public class MainController
 	void planChange(MouseEvent event) throws IllegalArgumentException, RemoteException
 	{
 		editButton.setDisable(false);
+		currNode = null;
 		logout.setDisable(false);
+		comment.setDisable(true);
+		commentSubmit.setDisable(true);
 		tree.setRoot(makeTree(yearDropdown.getValue().getYear()).getRoot());
 
 		tree.getSelectionModel().selectedItemProperty()
@@ -202,13 +225,26 @@ public class MainController
 	@FXML
 	void compare(MouseEvent event) throws IOException, Exception
 	{
-		vtmodel.showCompare();
+		vtmodel.showCompare(user);
 	}
 
 	@FXML
 	void save(MouseEvent event) throws RemoteException
 	{
 		saveC(tree.getRoot().getValue(), yearDropdown.getValue().getYear());
+	}
+	
+	@FXML
+	public void addComment(MouseEvent event) throws RemoteException
+	{
+		ArrayList<String> help = currNode.getValue().getComments();
+		String string = comment.getText();
+		string= user + ": " + string;
+		help.add(string);
+		currNode.getValue().setComments(help);
+		save(event);
+		comment.setText("");
+		makeComments();
 	}
 
 	void setText(String newvalue)
@@ -222,22 +258,65 @@ public class MainController
 		{
 			contentField.textProperty().removeListener(listener);
 		}
-		ChangeListener<String> listener;
 		if (item != null)
 		{
 			String str = item.getValue().getData();
 			contentField.setText(str);
+			comment.setDisable(false);
+			commentSubmit.setDisable(false);
+			comment.setText("");
 			this.currNode = item;
-			if (editButton.getText().contentEquals("View"))
+			if (editButton.getText() == "View")
 			{
 				addChildButton.setDisable(false);
 				removeButton.setDisable(false);
 			}
+			makeComments();
+
 		}
 		listener = (observable, oldvalue, newvalue) -> setText(newvalue);
 		contentField.textProperty().addListener(listener);
+		
 
 	}
+	
+	public void makeComments()
+	{
+		if (commentVBox.getChildren() != null)
+		{
+			commentVBox.getChildren().clear();
+		}
+		ArrayList<String> comments = currNode.getValue().getComments();
+		for (int i = 0; i < comments.size(); i++)
+		{
+			Button rmv = new Button("Remove");
+			Label lbl = new Label(comments.get(i));
+			HBox hbox = new HBox(lbl,rmv);
+			commentVBox.getChildren().add(hbox);
+			rmv.setOnAction(e -> {
+				try {
+					removeComment(hbox);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			});
+		}
+		
+	}
+	
+	public void removeComment(HBox hbox) throws RemoteException
+	{
+		String str = ((Label) hbox.getChildren().get(0)).getText();
+		ArrayList<String> help = currNode.getValue().getComments();
+		help.remove(str);
+		currNode.getValue().setComments(help);
+		makeComments();
+		saveC(tree.getRoot().getValue(), yearDropdown.getValue().getYear());
+		
+	}
+	
+
 
 	/**
 	 * Gets the plans of the department for display in a choiceBox
@@ -334,7 +413,7 @@ public class MainController
 	{
 		client.getPlan(year);
 		Node master = client.getCurrNode();
-		Node copy = new Node(null, master.getName(), master.getData(), null);
+		Node copy = new Node(null, master.getName(), master.getData(), null,null);
 		deepCopier(master, copy);
 		TreeItem<Node> treeRoot = new TreeItem<Node>(copy);
 		treeRoot.setExpanded(true);
@@ -358,12 +437,16 @@ public class MainController
 			for (int i = 0; i < master.getChildren().size(); i++)
 			{
 				Node tree1 = new Node(copy, master.getChildren().get(i).getName(),
-						master.getChildren().get(i).getData(), null);
+						master.getChildren().get(i).getData(), null,null);
 				copy.getChildren().add(tree1);
 				deepCopier(master.getChildren().get(i), tree1);
 			}
 		}
 
+	}
+	public void setUser(String user)
+	{
+		this.user=user;
 	}
 	
 

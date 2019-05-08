@@ -62,7 +62,7 @@ public class Account
 		}
 		throw new IllegalArgumentException("Invalid username and/or password");
 	}
-
+	
 	/**
 	 * @return the password
 	 */

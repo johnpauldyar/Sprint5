@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -46,17 +47,18 @@ public class Driver extends Application implements ViewTransitionalModel
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
-		try
-		{
-			registry = LocateRegistry.getRegistry(1060);
-			Server stub = (Server) registry.lookup("PlannerServer");
-			client = new Client(stub);
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-
-		}
+//		try
+//		{
+//			registry = LocateRegistry.getRegistry(1060);
+//			Server stub = (Server) registry.lookup("PlannerServer");
+//			client = new Client(stub);
+//
+//		} catch (Exception e)
+//		{
+//			e.printStackTrace();
+//
+//		}
+//		
 
 		stage = primaryStage;
 		showLogin();
@@ -108,7 +110,7 @@ public class Driver extends Application implements ViewTransitionalModel
 
 	}
 
-	public void showMainView() throws Exception
+	public void showMainView(String user) throws Exception
 	{
 		FXMLLoader loader2 = new FXMLLoader(getClass().getResource("ClientViewScene.fxml"));
 
@@ -119,10 +121,12 @@ public class Driver extends Application implements ViewTransitionalModel
 		mainController.setClient(client);
 		mainController.setViewTransitionalModel(this);
 		mainController.getPlans(mainController.yearDropdown);
+		mainController.setUser(user);
+		mainController.userId.setText(user + ":");
 		stage.setScene(scene2);
 	}
 	
-	public void showCompare() throws Exception
+	public void showCompare(String user) throws Exception
 	{
 		FXMLLoader loader3 = new FXMLLoader(getClass().getResource("CompareMode.fxml"));
 
@@ -134,6 +138,14 @@ public class Driver extends Application implements ViewTransitionalModel
 		compCont.setViewTransitionalModel(this);
 		compCont.getPlans(compCont.drop1);
 		compCont.getPlans(compCont.drop2);
+		compCont.setUser(user);
 		stage.setScene(scene3);
+	}
+	
+	@Override
+	public void setClient(Client client) throws IOException 
+	{
+		this.client=client;
+
 	}
 }
