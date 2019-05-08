@@ -1,7 +1,13 @@
 GUI Testing:
-Run main/ServerImplementation.java then test/GUIMainTest.java, test/LoginTest.java
+Run GUITestSuite.java in test folder to run the test
 
-GUI implementation authors:
+GUI Run:
+To run the program outside of the test, run serverImplementation.java and then driver.java
+
+GUI final sprint design doc:
+https://docs.google.com/document/d/1RBXPszrbqT78-OPeCB0BkKKaS8n00ZP97Nu8lWerwtM/edit?usp=sharing
+
+GUI initial implementation authors:
 https://docs.google.com/document/d/1JGaaPfpaPN0RE5hOiXL-lZ0hIkXgPw4YOGTwIwnPAcY/edit?usp=sharing
 
 ______________________________________________________________________________
@@ -11,11 +17,3 @@ https://docs.google.com/document/d/191hfuDoQ1cgvpK79QYWPwGwT6N__S5hoKtWFixUR7Bc/
 
 This is our design document for sprint 1 and 2:
 https://docs.google.com/document/d/1usWl9l82Wa1OelQTavswDzb6ZTNx1EhyaA9iFIS7zCY/edit?usp=sharing
-
-Testing Notes:
-If running client and server on the same machine:
-- LocalTestSuite
-If running server and client on separate machines:
-1. Run ServerImplementation. This can be done in eclipse. The main method automatically generates RMI registry.
-2. Edit RemoteClientTest setUpBeforeClass method. You will need to change the hostname to whatever machine is running the server. Verify the ports are the same. 
-3. Run RemoteTestSuite
