@@ -47,18 +47,18 @@ public class Driver extends Application implements ViewTransitionalModel
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
-//		try
-//		{
-//			registry = LocateRegistry.getRegistry(1060);
-//			Server stub = (Server) registry.lookup("PlannerServer");
-//			client = new Client(stub);
-//
-//		} catch (Exception e)
-//		{
-//			e.printStackTrace();
-//
-//		}
-//		
+		try
+		{
+			registry = LocateRegistry.getRegistry(1060);
+			Server stub = (Server) registry.lookup("PlannerServer");
+			client = new Client(stub);
+
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+
+		}
+		
 
 		stage = primaryStage;
 		showLogin();
