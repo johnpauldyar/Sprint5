@@ -1,5 +1,6 @@
 GUI Testing:
 Run GUITestSuite.java in test folder to run the test
+Note: You may have to run the test a second time after a clean download
 
 GUI Run:
 To run the program outside of the test, run serverImplementation.java and then driver.java
